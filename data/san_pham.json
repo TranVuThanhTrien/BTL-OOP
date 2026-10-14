@@ -1,0 +1,122 @@
+[
+  {
+    "maSP": "AT01",
+    "ten": "Áo thun",
+    "maNguoiBan": "TT",
+    "donGia": 120000,
+    "khoiLuong": 0.3,
+    "tonKho": 30,
+    "daBan": 1240,
+    "danhGia": 4.8
+  },
+  {
+    "maSP": "QJ02",
+    "ten": "Quần jeans",
+    "maNguoiBan": "TT",
+    "donGia": 280000,
+    "khoiLuong": 0.7,
+    "tonKho": 20,
+    "daBan": 860,
+    "danhGia": 4.7
+  },
+  {
+    "maSP": "GS03",
+    "ten": "Giày sneaker",
+    "maNguoiBan": "TT",
+    "donGia": 450000,
+    "khoiLuong": 0.9,
+    "tonKho": 12,
+    "daBan": 415,
+    "danhGia": 4.9
+  },
+  {
+    "maSP": "MU04",
+    "ten": "Mũ lưỡi trai",
+    "maNguoiBan": "TT",
+    "donGia": 90000,
+    "khoiLuong": 0.1,
+    "tonKho": 40,
+    "daBan": 2300,
+    "danhGia": 4.6
+  },
+  {
+    "maSP": "TN05",
+    "ten": "Tai nghe",
+    "maNguoiBan": "DT",
+    "donGia": 350000,
+    "khoiLuong": 0.2,
+    "tonKho": 15,
+    "daBan": 980,
+    "danhGia": 4.8
+  },
+  {
+    "maSP": "SC06",
+    "ten": "Sạc nhanh 20W",
+    "maNguoiBan": "DT",
+    "donGia": 160000,
+    "khoiLuong": 0.15,
+    "tonKho": 25,
+    "daBan": 3150,
+    "danhGia": 4.7
+  },
+  {
+    "maSP": "CH07",
+    "ten": "Chuột không dây",
+    "maNguoiBan": "DT",
+    "donGia": 210000,
+    "khoiLuong": 0.1,
+    "tonKho": 18,
+    "daBan": 1420,
+    "danhGia": 4.6
+  },
+  {
+    "maSP": "LM08",
+    "ten": "Loa mini",
+    "maNguoiBan": "DT",
+    "donGia": 390000,
+    "khoiLuong": 0.4,
+    "tonKho": 10,
+    "daBan": 530,
+    "danhGia": 4.5
+  },
+  {
+    "maSP": "SL09",
+    "ten": "Sách lập trình C++",
+    "maNguoiBan": "NS",
+    "donGia": 90000,
+    "khoiLuong": 0.5,
+    "tonKho": 35,
+    "daBan": 760,
+    "danhGia": 4.9
+  },
+  {
+    "maSP": "ST10",
+    "ten": "Sổ tay",
+    "maNguoiBan": "NS",
+    "donGia": 45000,
+    "khoiLuong": 0.2,
+    "tonKho": 60,
+    "daBan": 4100,
+    "danhGia": 4.8
+  },
+  {
+    "maSP": "BG11",
+    "ten": "Bút gel (hộp)",
+    "maNguoiBan": "NS",
+    "donGia": 60000,
+    "khoiLuong": 0.1,
+    "tonKho": 50,
+    "daBan": 2800,
+    "danhGia": 4.7
+  },
+  {
+    "maSP": "TT12",
+    "ten": "Truyện tranh",
+    "maNguoiBan": "NS",
+    "donGia": 35000,
+    "khoiLuong": 0.2,
+    "tonKho": 0,
+    "daBan": 1900,
+    "danhGia": 4.6
+  }
+]
