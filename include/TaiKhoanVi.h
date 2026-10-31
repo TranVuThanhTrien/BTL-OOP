@@ -1,14 +1,17 @@
 #pragma once
 #include "Common.h"
-// Người phụ trách: C | nhánh feature/payment-storage | Ví điện tử của khách hàng: nạp tiền, trừ tiền, lịch sử
-struct GiaoDichVi { string moTa; double soTien; string thoiDiem; };   // soTien > 0: nạp, < 0: thanh toán
+// Người phụ trách: C | nhánh feature/payment-storage | LỚP 1 | Ví: khách (thanh toán, nhận hoàn tiền) và shipper (nhận phí ship) dùng chung
+struct GiaoDichVi { string moTa; double soTien; string thoiDiem; };   // soTien > 0: tiền vào, < 0: tiền ra
 class TaiKhoanVi {
     double m_soDu = 0;
     vector<GiaoDichVi> m_lichSu;
 public:
-    // TODO(C-10): double soDu() const;  const vector<GiaoDichVi>& lichSu() const;
-    // TODO(C-10): void napTien(double soTien, const string& nguon);   // 10.000 <= soTien <= 20.000.000, sai -> ThanhToanThatBaiException
-    // TODO(C-10): void truTien(double soTien, const string& moTa);    // không đủ số dư -> ThanhToanThatBaiException
-    // TODO(C-11): void hoanTien(double soTien, const string& moTa);   // cộng tiền hoàn do shop gửi, ghi lịch sử; ShipperVanChuyen dùng chung TaiKhoanVi để nhận phí ship khi đơn Hoàn tất
-    // TODO(C-10): ghi GiaoDichVi (mô tả, số tiền, thời điểm) mỗi lần nạp hoặc trừ
+    double soDu() const { return m_soDu; }
+    const vector<GiaoDichVi>& lichSu() const { return m_lichSu; }
+    void napTien(double soTien, const string& nguon);   // TODO(C-10): hangso::NAP_TOI_THIEU <= soTien <= NAP_TOI_DA, sai -> ThanhToanThatBaiException
+    void truTien(double soTien, const string& moTa);    // TODO(C-10): không đủ số dư -> ThanhToanThatBaiException
+    void nhanTien(double soTien, const string& moTa);   // TODO(C-11): cộng tiền (phí ship cho shipper); soTien > 0
+    void hoanTien(double soTien, const string& moTa);   // TODO(C-11): tiền hoàn của shop cho khách (gọi nhanTien)
+    // Mọi hàm trên ghi GiaoDichVi { moTa, soTien (có dấu), thoiGianHienTai() }
+    void khoiPhuc(double soDu, vector<GiaoDichVi> lichSu) { m_soDu = soDu; m_lichSu = std::move(lichSu); }   // chỉ DataStore gọi khi đọc file
 };
