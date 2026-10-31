@@ -4,6 +4,15 @@ Mỗi dòng `TODO(X-n)` trong code tương ứng một mục dưới đây. Làm
 Chuẩn: C++17, tách .h/.cpp, `unique_ptr`, lớp abstract có `virtual ~X()` và `clone()`, không rò rỉ bộ nhớ.
 Tài khoản demo: khach/123, TT/123 (Thời Trang), DT/123 (Điện Tử), NS/123 (Nhà Sách), GHN/123, GHTK/123, VTP/123 (shipper), quanly/admin. Giao diện mẫu (3 vai trò: khách hàng, người bán, quản lý) đã làm sẵn trong `web/index.html` (dữ liệu mô phỏng); E chỉ cần nối API thật.
 
+## Kiến trúc đã chốt (v1) – ĐỌC `docs/KIEN_TRUC.md` TRƯỚC KHI CODE
+Header đã được chốt: chữ ký hàm trong `include/*.h` là HỢP ĐỒNG giữa các thành viên. Muốn đổi chữ ký phải báo nhóm và sửa header trên develop, không tự đổi trong nhánh riêng.
+Các mục dưới đây là thay đổi so với skeleton ban đầu (không đánh số lại các TODO cũ):
+- Thêm `src/Common.cpp` (tiện ích dùng chung: thoiGianHienTai, dinhDangTien, bamMatKhau...): đã viết xong, cả nhóm dùng.
+- Thêm `KhoSanPham` (A): nơi duy nhất giữ danh sách sản phẩm; tìm/lọc/sắp xếp cho D-21. Mã việc: A-23.
+- `KhuyenMai` nhận `TomTatGio` thay vì `GioHang` (để DonHang tính lại giảm giá từ chi tiết). Bật/tắt khuyến mãi và bảng giá ship là trạng thái tĩnh trong KhuyenMai.cpp / DonViVanChuyen.cpp (không lưu file). Mã việc: A-7, B-3.
+- `DonHang` có thêm `maKhach`, `chotDon()` (chụp phí ship), `traPhiShip(ví)`, `hoanTien(maShop, ví khách)`; Service gọi, DonHang không tự giữ ví người khác.
+- `OrderException` đã xong: có `loai()` và `maHttp()` (C-1 chỉ còn phần test).
+
 ## Bản đồ file: ai sửa file nào, có bao nhiêu TODO
 Mọi file code đều có TODO. Chỉ 4 file không có: 2 file cấu hình/giữ chỗ và 2 file dữ liệu JSON (JSON không ghi chú được nên TODO của chúng nằm trong `data/README.md`).
 
@@ -70,6 +79,7 @@ Mọi file code đều có TODO. Chỉ 4 file không có: 2 file cấu hình/gi�
 - [ ] A-20 Luồng trả hàng qua shipper: shipperNhanDonTra (đúng hãng) rồi shipperXacNhanGuiVeShop mới chuyển sang Trả hàng; không kết thúc đơn khi trả hàng đang xử lý
 - [ ] A-21 Chat theo đơn: TinNhan, guiTinNhan (chỉ người thuộc đơn, tối đa 500 ký tự), soTinChuaDoc
 - [ ] A-22 SanPham: daBan, danhGia, congDaBan để hiển thị và sắp xếp Bán chạy, Phổ biến
+- [ ] A-23 KhoSanPham: tim (tuKhoa, maShop, sapXep), lay, them, xoa, nhapKho; GioHang::tomTat
 - [ ] A-13 Quản lý repo, Jira; review và merge PR; 28/10 merge main, tag v1.0
 
 ## B – feature/design-patterns (thuyết trình 2)
