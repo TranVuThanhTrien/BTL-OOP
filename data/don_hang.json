@@ -1,1 +1,269 @@
-[]
+[[
+  {
+    "maDon": "DH001",
+    "maKhach": "khach",
+    "khoangCachKm": 12,
+    "thoiDiemDat": "2026-10-30 09:15:22",
+    "thanhToan": "COD",
+    "vanChuyen": "GHN",
+    "khuyenMai": "",
+    "phiShip": 21700,
+    "daChot": true,
+    "daTraPhiShip": false,
+    "trangThai": "Mới",
+    "chiTiet": [
+      { "maSP": "AT01", "maNguoiBan": "TT", "soLuong": 2, "donGia": 120000, "khoiLuong": 0.3 },
+      { "maSP": "MU04", "maNguoiBan": "TT", "soLuong": 1, "donGia": 90000, "khoiLuong": 0.1 }
+    ],
+    "lichSu": [
+      { "trangThai": "Mới", "thoiDiem": "2026-10-30 09:15:22" }
+    ],
+    "diaChiGiao": { "hoTen": "Nguyễn Văn An", "soDienThoai": "0912345678", "diaChi": "12 Trần Phú, Hà Đông, Hà Nội" },
+    "yeuCauTra": null,
+    "anhGiaoHang": [],
+    "anhKhieuNai": [],
+    "tinNhan": [],
+    "daHoanTien": {},
+    "thoiDiemKetThuc": ""
+  },
+  {
+    "maDon": "DH002",
+    "maKhach": "khach",
+    "khoangCachKm": 8,
+    "thoiDiemDat": "2026-10-29 14:02:10",
+    "thanhToan": "ViDienTu",
+    "vanChuyen": "GHTK",
+    "khuyenMai": "GIAM10",
+    "phiShip": 16875,
+    "daChot": true,
+    "daTraPhiShip": false,
+    "trangThai": "Xác nhận",
+    "chiTiet": [
+      { "maSP": "TN05", "maNguoiBan": "DT", "soLuong": 1, "donGia": 350000, "khoiLuong": 0.2 },
+      { "maSP": "SC06", "maNguoiBan": "DT", "soLuong": 1, "donGia": 160000, "khoiLuong": 0.15 }
+    ],
+    "lichSu": [
+      { "trangThai": "Mới", "thoiDiem": "2026-10-29 14:02:10" },
+      { "trangThai": "Xác nhận", "thoiDiem": "2026-10-29 15:30:45" }
+    ],
+    "diaChiGiao": { "hoTen": "Nguyễn Văn An", "soDienThoai": "0912345678", "diaChi": "12 Trần Phú, Hà Đông, Hà Nội" },
+    "yeuCauTra": null,
+    "anhGiaoHang": [],
+    "anhKhieuNai": [],
+    "tinNhan": [
+      { "maNguoiGui": "khach", "vaiTro": "KhachHang", "noiDung": "Shop ơi, đóng gói cẩn thận giúp mình nhé.", "thoiDiem": "2026-10-29 14:10:00" },
+      { "maNguoiGui": "DT", "vaiTro": "NguoiBan", "noiDung": "Dạ shop đã xác nhận đơn, sẽ gửi hàng sớm ạ.", "thoiDiem": "2026-10-29 15:31:20" }
+    ],
+    "daHoanTien": {},
+    "thoiDiemKetThuc": ""
+  },
+  {
+    "maDon": "DH003",
+    "maKhach": "khach2",
+    "khoangCachKm": 25,
+    "thoiDiemDat": "2026-10-27 08:40:05",
+    "thanhToan": "TheTinDung",
+    "vanChuyen": "ViettelPost",
+    "khuyenMai": "FREESHIP",
+    "phiShip": 28200,
+    "daChot": true,
+    "daTraPhiShip": false,
+    "trangThai": "Đang giao",
+    "chiTiet": [
+      { "maSP": "SL09", "maNguoiBan": "NS", "soLuong": 2, "donGia": 90000, "khoiLuong": 0.5 },
+      { "maSP": "ST10", "maNguoiBan": "NS", "soLuong": 3, "donGia": 45000, "khoiLuong": 0.2 }
+    ],
+    "lichSu": [
+      { "trangThai": "Mới", "thoiDiem": "2026-10-27 08:40:05" },
+      { "trangThai": "Xác nhận", "thoiDiem": "2026-10-27 10:12:33" },
+      { "trangThai": "Đang giao", "thoiDiem": "2026-10-28 07:55:18" }
+    ],
+    "diaChiGiao": { "hoTen": "Trần Thị Bình", "soDienThoai": "0987654321", "diaChi": "45 Lê Lợi, Quận 1, TP. Hồ Chí Minh" },
+    "yeuCauTra": null,
+    "anhGiaoHang": [],
+    "anhKhieuNai": [],
+    "tinNhan": [
+      { "maNguoiGui": "VTP", "vaiTro": "Shipper", "noiDung": "Mình đang giao, khoảng 2 tiếng nữa tới nơi nhé.", "thoiDiem": "2026-10-28 08:00:00" }
+    ],
+    "daHoanTien": {},
+    "thoiDiemKetThuc": ""
+  },
+  {
+    "maDon": "DH004",
+    "maKhach": "khach",
+    "khoangCachKm": 5,
+    "thoiDiemDat": "2026-10-20 19:22:41",
+    "thanhToan": "ViDienTu",
+    "vanChuyen": "GHN",
+    "khuyenMai": "",
+    "phiShip": 20200,
+    "daChot": true,
+    "daTraPhiShip": true,
+    "trangThai": "Hoàn tất",
+    "chiTiet": [
+      { "maSP": "GS03", "maNguoiBan": "TT", "soLuong": 1, "donGia": 450000, "khoiLuong": 0.9 }
+    ],
+    "lichSu": [
+      { "trangThai": "Mới", "thoiDiem": "2026-10-20 19:22:41" },
+      { "trangThai": "Xác nhận", "thoiDiem": "2026-10-20 20:05:00" },
+      { "trangThai": "Đang giao", "thoiDiem": "2026-10-21 08:10:12" },
+      { "trangThai": "Hoàn tất", "thoiDiem": "2026-10-21 15:47:30" }
+    ],
+    "diaChiGiao": { "hoTen": "Nguyễn Văn An", "soDienThoai": "0912345678", "diaChi": "12 Trần Phú, Hà Đông, Hà Nội" },
+    "yeuCauTra": null,
+    "anhGiaoHang": [
+      { "duongDan": "anh/giao_DH004_1.png", "moTa": "Giao tận tay khách", "thoiDiem": "2026-10-21 15:47:29" }
+    ],
+    "anhKhieuNai": [],
+    "tinNhan": [
+      { "maNguoiGui": "khach", "vaiTro": "KhachHang", "noiDung": "Mình đã nhận giày, cảm ơn shop.", "thoiDiem": "2026-10-21 16:00:00" },
+      { "maNguoiGui": "TT", "vaiTro": "NguoiBan", "noiDung": "Cảm ơn bạn đã ủng hộ shop ạ!", "thoiDiem": "2026-10-21 16:20:00" }
+    ],
+    "daHoanTien": {},
+    "thoiDiemKetThuc": ""
+  },
+  {
+    "maDon": "DH005",
+    "maKhach": "khach",
+    "khoangCachKm": 15,
+    "thoiDiemDat": "2026-10-10 10:00:00",
+    "thanhToan": "ViDienTu",
+    "vanChuyen": "GHTK",
+    "khuyenMai": "GIAM10",
+    "phiShip": 20250,
+    "daChot": true,
+    "daTraPhiShip": true,
+    "trangThai": "Trả hàng",
+    "chiTiet": [
+      { "maSP": "QJ02", "maNguoiBan": "TT", "soLuong": 1, "donGia": 280000, "khoiLuong": 0.7 },
+      { "maSP": "AT01", "maNguoiBan": "TT", "soLuong": 1, "donGia": 120000, "khoiLuong": 0.3 }
+    ],
+    "lichSu": [
+      { "trangThai": "Mới", "thoiDiem": "2026-10-10 10:00:00" },
+      { "trangThai": "Xác nhận", "thoiDiem": "2026-10-10 11:20:00" },
+      { "trangThai": "Đang giao", "thoiDiem": "2026-10-11 08:00:00" },
+      { "trangThai": "Hoàn tất", "thoiDiem": "2026-10-11 16:30:00" },
+      { "trangThai": "Trả hàng", "thoiDiem": "2026-10-16 14:20:00" }
+    ],
+    "diaChiGiao": { "hoTen": "Nguyễn Văn An", "soDienThoai": "0912345678", "diaChi": "12 Trần Phú, Hà Đông, Hà Nội" },
+    "yeuCauTra": { "lyDo": "Quần không vừa size", "thoiDiem": "2026-10-12 09:30:00", "trangThai": "DaVeShop" },
+    "anhGiaoHang": [
+      { "duongDan": "anh/giao_DH005_1.png", "moTa": "Để hàng tại bảo vệ tòa nhà", "thoiDiem": "2026-10-11 16:29:50" }
+    ],
+    "anhKhieuNai": [
+      { "duongDan": "anh/khieunai_DH005_1.png", "moTa": "Ảnh nhãn size không khớp", "thoiDiem": "2026-10-12 09:25:00" }
+    ],
+    "tinNhan": [
+      { "maNguoiGui": "khach", "vaiTro": "KhachHang", "noiDung": "Quần bị chật, mình muốn trả hàng.", "thoiDiem": "2026-10-12 09:31:00" },
+      { "maNguoiGui": "TT", "vaiTro": "NguoiBan", "noiDung": "Shop đồng ý nhận trả, bạn chờ shipper qua lấy nhé.", "thoiDiem": "2026-10-12 10:05:00" },
+      { "maNguoiGui": "GHTK", "vaiTro": "Shipper", "noiDung": "Mình đã lấy hàng trả và gửi về shop.", "thoiDiem": "2026-10-14 09:00:00" }
+    ],
+    "daHoanTien": { "TT": 360000 },
+    "thoiDiemKetThuc": "2026-10-16 15:00:00"
+  },
+  {
+    "maDon": "DH006",
+    "maKhach": "khach2",
+    "khoangCachKm": 30,
+    "thoiDiemDat": "2026-10-24 13:05:00",
+    "thanhToan": "ViDienTu",
+    "vanChuyen": "GHN",
+    "khuyenMai": "GIAM30K",
+    "phiShip": 26800,
+    "daChot": true,
+    "daTraPhiShip": true,
+    "trangThai": "Hoàn tất",
+    "chiTiet": [
+      { "maSP": "LM08", "maNguoiBan": "DT", "soLuong": 1, "donGia": 390000, "khoiLuong": 0.4 },
+      { "maSP": "BG11", "maNguoiBan": "NS", "soLuong": 2, "donGia": 60000, "khoiLuong": 0.1 }
+    ],
+    "lichSu": [
+      { "trangThai": "Mới", "thoiDiem": "2026-10-24 13:05:00" },
+      { "trangThai": "Xác nhận", "thoiDiem": "2026-10-24 14:00:00" },
+      { "trangThai": "Đang giao", "thoiDiem": "2026-10-25 09:00:00" },
+      { "trangThai": "Hoàn tất", "thoiDiem": "2026-10-25 17:10:00" }
+    ],
+    "diaChiGiao": { "hoTen": "Trần Thị Bình", "soDienThoai": "0987654321", "diaChi": "45 Lê Lợi, Quận 1, TP. Hồ Chí Minh" },
+    "yeuCauTra": { "lyDo": "Loa mini bị rè âm khi bật to", "thoiDiem": "2026-10-26 10:15:00", "trangThai": "Cho" },
+    "anhGiaoHang": [
+      { "duongDan": "anh/giao_DH006_1.png", "moTa": "Giao cho người nhà", "thoiDiem": "2026-10-25 17:09:40" }
+    ],
+    "anhKhieuNai": [
+      { "duongDan": "anh/khieunai_DH006_1.png", "moTa": "Ảnh loa bị lỗi", "thoiDiem": "2026-10-26 10:10:00" }
+    ],
+    "tinNhan": [
+      { "maNguoiGui": "khach2", "vaiTro": "KhachHang", "noiDung": "Loa bị rè, mình gửi yêu cầu trả hàng.", "thoiDiem": "2026-10-26 10:16:00" }
+    ],
+    "daHoanTien": {},
+    "thoiDiemKetThuc": ""
+  },
+  {
+    "maDon": "DH007",
+    "maKhach": "khach2",
+    "khoangCachKm": 10,
+    "thoiDiemDat": "2026-10-05 16:00:00",
+    "thanhToan": "COD",
+    "vanChuyen": "ViettelPost",
+    "khuyenMai": "",
+    "phiShip": 20400,
+    "daChot": true,
+    "daTraPhiShip": true,
+    "trangThai": "Hoàn tất",
+    "chiTiet": [
+      { "maSP": "MU04", "maNguoiBan": "TT", "soLuong": 3, "donGia": 90000, "khoiLuong": 0.1 },
+      { "maSP": "ST10", "maNguoiBan": "NS", "soLuong": 2, "donGia": 45000, "khoiLuong": 0.2 }
+    ],
+    "lichSu": [
+      { "trangThai": "Mới", "thoiDiem": "2026-10-05 16:00:00" },
+      { "trangThai": "Xác nhận", "thoiDiem": "2026-10-05 17:30:00" },
+      { "trangThai": "Đang giao", "thoiDiem": "2026-10-06 08:15:00" },
+      { "trangThai": "Hoàn tất", "thoiDiem": "2026-10-07 11:40:00" }
+    ],
+    "diaChiGiao": { "hoTen": "Trần Thị Bình", "soDienThoai": "0987654321", "diaChi": "45 Lê Lợi, Quận 1, TP. Hồ Chí Minh" },
+    "yeuCauTra": null,
+    "anhGiaoHang": [
+      { "duongDan": "anh/giao_DH007_1.png", "moTa": "Khách nhận hàng và trả tiền mặt", "thoiDiem": "2026-10-07 11:39:30" }
+    ],
+    "anhKhieuNai": [],
+    "tinNhan": [],
+    "daHoanTien": {},
+    "thoiDiemKetThuc": "2026-10-14 12:00:00"
+  },
+  {
+    "maDon": "DH008",
+    "maKhach": "khach",
+    "khoangCachKm": 20,
+    "thoiDiemDat": "2026-10-22 09:30:00",
+    "thanhToan": "ViDienTu",
+    "vanChuyen": "GHTK",
+    "khuyenMai": "FREESHIP",
+    "phiShip": 20250,
+    "daChot": true,
+    "daTraPhiShip": true,
+    "trangThai": "Hoàn tất",
+    "chiTiet": [
+      { "maSP": "SC06", "maNguoiBan": "DT", "soLuong": 2, "donGia": 160000, "khoiLuong": 0.15 },
+      { "maSP": "TN05", "maNguoiBan": "DT", "soLuong": 1, "donGia": 350000, "khoiLuong": 0.2 }
+    ],
+    "lichSu": [
+      { "trangThai": "Mới", "thoiDiem": "2026-10-22 09:30:00" },
+      { "trangThai": "Xác nhận", "thoiDiem": "2026-10-22 10:45:00" },
+      { "trangThai": "Đang giao", "thoiDiem": "2026-10-23 08:20:00" },
+      { "trangThai": "Hoàn tất", "thoiDiem": "2026-10-23 14:05:00" }
+    ],
+    "diaChiGiao": { "hoTen": "Nguyễn Văn An", "soDienThoai": "0912345678", "diaChi": "12 Trần Phú, Hà Đông, Hà Nội" },
+    "yeuCauTra": { "lyDo": "Sạc nhanh không sạc được điện thoại", "thoiDiem": "2026-10-24 08:00:00", "trangThai": "ChoShipperLay" },
+    "anhGiaoHang": [
+      { "duongDan": "anh/giao_DH008_1.png", "moTa": "Giao tại cửa", "thoiDiem": "2026-10-23 14:04:40" }
+    ],
+    "anhKhieuNai": [
+      { "duongDan": "anh/khieunai_DH008_1.png", "moTa": "Ảnh củ sạc bị lỗi", "thoiDiem": "2026-10-24 07:55:00" }
+    ],
+    "tinNhan": [
+      { "maNguoiGui": "khach", "vaiTro": "KhachHang", "noiDung": "Củ sạc không hoạt động, mình xin trả hàng.", "thoiDiem": "2026-10-24 08:01:00" },
+      { "maNguoiGui": "DT", "vaiTro": "NguoiBan", "noiDung": "Shop đã chấp nhận, shipper sẽ qua lấy hàng trả.", "thoiDiem": "2026-10-24 09:30:00" }
+    ],
+    "daHoanTien": {},
+    "thoiDiemKetThuc": ""
+  }
+]
