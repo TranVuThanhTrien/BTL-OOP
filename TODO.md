@@ -58,28 +58,28 @@ Mọi file code đều có TODO. Chỉ 4 file không có: 2 file cấu hình/gi�
 | `web/index.html` | E | 2 | cần cài đặt |
 
 ## A – feature/core-domain (Leader, thuyết trình 1)
-- [x] A-1 SanPham: getter/setter, kiểm tra dữ liệu (giá > 0, kg > 0, tồn >= 0)
-- [x] A-2 SanPham: giamTon / tangTon (ném HetHangException)
-- [x] A-3 NguoiDung (abstract: vaiTro, coQuyen, clone) + KhachHang (có TaiKhoanVi), NguoiBan (mã shop TT, DT, NS = tên đăng nhập), QuanLy
-- [x] A-4 GioHang: themSanPham, capNhatSoLuong, xoaSanPham, lamTrong
-- [x] A-5 GioHang: tinhTongTien, tinhTongKhoiLuong, demNguoiBan, tongTheoNguoiBan
-- [x] A-6 KMPhanTram (GIAM10), KMGiamTien (GIAM30K), KMFreeShip (FREESHIP)
-- [x] A-7 taoKhuyenMai(ma): factory, mã sai ném MaGiamGiaKhongHopLeException
-- [x] A-8 ChiTietDonHang: thành tiền, khối lượng, getter
-- [x] A-9 DonHang: Big 5 (destructor, copy ctor, operator=, move ctor, move assign noexcept) dùng clone()
-- [x] A-10 DonHang: operator==, operator<<
-- [x] A-11 DonHang: tinhTienHang, tinhGiamGia, tinhTongThanhToan
-- [x] A-12 DonHang: chuyenTrangThai, datTrangThai
-- [x] A-14 DonHang: ketThucDon, daKetThuc (chỉ sau Hoàn tất hoặc Trả hàng); đơn đã kết thúc thì không đổi trạng thái được nữa
-- [x] A-15 ShipperVanChuyen (kế thừa NguoiDung, giữ mã hãng GHN, GHTK hoặc ViettelPost; coQuyen chỉ cho đơn của hãng mình)
-- [x] A-16 Địa chỉ: DiaChi giao của khách (nhập khi thanh toán, lưu lại cho lần sau), DiaChi lấy hàng của shop (người bán tự sửa)
-- [x] A-17 Trả hàng: yeuCauTraHang (khách, đơn Hoàn tất), hoanHang (shop chấp nhận trả, chờ shipper lấy hàng trả; chưa sang Trả hàng), tuChoiTraHang, hoanTien(maShop) hoàn tiền hàng vào ví khách
-- [x] A-18 Ảnh đính kèm: themAnhGiaoHang (shipper gửi khách), themAnhKhieuNai (khách gửi shop)
-- [x] A-19 Xác nhận giao thành công bắt buộc có ảnh: coAnhGiaoHang, xacNhanGiaoThanhCong(ảnh); thiếu ảnh thì không sang Hoàn tất (quản lý cũng không bỏ qua); phí ship chỉ cộng cho shipper sau bước này
-- [x] A-20 Luồng trả hàng qua shipper: shipperNhanDonTra (đúng hãng) rồi shipperXacNhanGuiVeShop mới chuyển sang Trả hàng; không kết thúc đơn khi trả hàng đang xử lý
-- [x] A-21 Chat theo đơn: TinNhan, guiTinNhan (chỉ người thuộc đơn, tối đa 500 ký tự), soTinChuaDoc
-- [x] A-22 SanPham: daBan, danhGia, congDaBan để hiển thị và sắp xếp Bán chạy, Phổ biến
-- [x] A-23 KhoSanPham: tim (tuKhoa, maShop, sapXep), lay, them, xoa, nhapKho; GioHang::tomTat
+- [ ] A-1 SanPham: getter/setter, kiểm tra dữ liệu (giá > 0, kg > 0, tồn >= 0)
+- [ ] A-2 SanPham: giamTon / tangTon (ném HetHangException)
+- [ ] A-3 NguoiDung (abstract: vaiTro, coQuyen, clone) + KhachHang (có TaiKhoanVi), NguoiBan (mã shop TT, DT, NS = tên đăng nhập), QuanLy
+- [ ] A-4 GioHang: themSanPham, capNhatSoLuong, xoaSanPham, lamTrong
+- [ ] A-5 GioHang: tinhTongTien, tinhTongKhoiLuong, demNguoiBan, tongTheoNguoiBan
+- [ ] A-6 KMPhanTram (GIAM10), KMGiamTien (GIAM30K), KMFreeShip (FREESHIP)
+- [ ] A-7 taoKhuyenMai(ma): factory, mã sai ném MaGiamGiaKhongHopLeException
+- [ ] A-8 ChiTietDonHang: thành tiền, khối lượng, getter
+- [ ] A-9 DonHang: Big 5 (destructor, copy ctor, operator=, move ctor, move assign noexcept) dùng clone()
+- [ ] A-10 DonHang: operator==, operator<<
+- [ ] A-11 DonHang: tinhTienHang, tinhGiamGia, tinhTongThanhToan
+- [ ] A-12 DonHang: chuyenTrangThai, datTrangThai
+- [ ] A-14 DonHang: ketThucDon, daKetThuc (chỉ sau Hoàn tất hoặc Trả hàng); đơn đã kết thúc thì không đổi trạng thái được nữa
+- [ ] A-15 ShipperVanChuyen (kế thừa NguoiDung, giữ mã hãng GHN, GHTK hoặc ViettelPost; coQuyen chỉ cho đơn của hãng mình)
+- [ ] A-16 Địa chỉ: DiaChi giao của khách (nhập khi thanh toán, lưu lại cho lần sau), DiaChi lấy hàng của shop (người bán tự sửa)
+- [ ] A-17 Trả hàng: yeuCauTraHang (khách, đơn Hoàn tất), hoanHang (shop chấp nhận trả, chờ shipper lấy hàng trả; chưa sang Trả hàng), tuChoiTraHang, hoanTien(maShop) hoàn tiền hàng vào ví khách
+- [ ] A-18 Ảnh đính kèm: themAnhGiaoHang (shipper gửi khách), themAnhKhieuNai (khách gửi shop)
+- [ ] A-19 Xác nhận giao thành công bắt buộc có ảnh: coAnhGiaoHang, xacNhanGiaoThanhCong(ảnh); thiếu ảnh thì không sang Hoàn tất (quản lý cũng không bỏ qua); phí ship chỉ cộng cho shipper sau bước này
+- [ ] A-20 Luồng trả hàng qua shipper: shipperNhanDonTra (đúng hãng) rồi shipperXacNhanGuiVeShop mới chuyển sang Trả hàng; không kết thúc đơn khi trả hàng đang xử lý
+- [ ] A-21 Chat theo đơn: TinNhan, guiTinNhan (chỉ người thuộc đơn, tối đa 500 ký tự), soTinChuaDoc
+- [ ] A-22 SanPham: daBan, danhGia, congDaBan để hiển thị và sắp xếp Bán chạy, Phổ biến
+- [ ] A-23 KhoSanPham: tim (tuKhoa, maShop, sapXep), lay, them, xoa, nhapKho; GioHang::tomTat
 - [ ] A-13 Quản lý repo, Jira; review và merge PR; 28/10 merge main, tag v1.0
 
 ## B – feature/design-patterns (thuyết trình 2)
