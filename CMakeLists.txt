@@ -12,11 +12,10 @@ add_executable(dt08 src/main.cpp ${LIB_SRC})
 add_executable(dt08_test src/main_test.cpp ${LIB_SRC})
 if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang" AND NOT WIN32)
   target_compile_options(dt08_test PRIVATE -fsanitize=address -fno-omit-frame-pointer)
-  target_link_libraries(dt08_test PRIVATE -fsanitize=address)
+  target_link_options(dt08_test PRIVATE -fsanitize=address)
 endif()
 find_package(Threads REQUIRED)
 target_link_libraries(dt08 Threads::Threads)
 
 # Người phụ trách: D (server), C (test)
 # TODO(D-5): Windows cần thêm ws2_32 vào target_link_libraries khi dùng cpp-httplib
-# TODO(C-6): thêm -fsanitize=address cho dt08_test (target_compile_options và target_link_options)
