@@ -3,8 +3,8 @@
     "biKhoa": false,
     "hoTen": "Nguyễn Văn A",
     "ma": "KH01",
-    "matKhauBam": "71e3cded78c3660b$4b0e2db27183dd13",
-    "tenDangNhap": "khach01",
+    "matKhauBam": "452e56b5034a0da2$2e29910657de475b",
+    "tenDangNhap": "khach",
     "vaiTro": "KhachHang",
     "vi": {
       "lichSu": [],
@@ -16,7 +16,7 @@
     "hoTen": "Shop Thời Trang",
     "ma": "NB01",
     "maShop": "TT",
-    "matKhauBam": "bf08f03512579489$0f426e93457c7083",
+    "matKhauBam": "8c3ca0943c96e1b7$ecadfeab3039edbb",
     "tenDangNhap": "TT",
     "vaiTro": "NguoiBan"
   },
@@ -25,7 +25,7 @@
     "hoTen": "Shop Điện Tử",
     "ma": "NB02",
     "maShop": "DT",
-    "matKhauBam": "81f8bab53b24fd63$3daa7b91a8d17583",
+    "matKhauBam": "adc7639617fa481b$665d71b1b56dc17b",
     "tenDangNhap": "DT",
     "vaiTro": "NguoiBan"
   },
@@ -34,7 +34,7 @@
     "hoTen": "Shop Nông Sản",
     "ma": "NB03",
     "maShop": "NS",
-    "matKhauBam": "37442cef318ee3c3$cc0638702f9e8a83",
+    "matKhauBam": "c86b101d4fbb6223$9630abd8d6ac2843",
     "tenDangNhap": "NS",
     "vaiTro": "NguoiBan"
   },
@@ -43,7 +43,7 @@
     "hoTen": "Giao Hàng Nhanh",
     "ma": "SP01",
     "maHang": "GHN",
-    "matKhauBam": "b8fd91273393fac7$aec1f5e660483383",
+    "matKhauBam": "3667c15b209c629a$c7ce03af61ff0e4b",
     "tenDangNhap": "GHN",
     "vaiTro": "Shipper",
     "vi": {
@@ -56,7 +56,7 @@
     "hoTen": "Giao Hàng Tiết Kiệm",
     "ma": "SP02",
     "maHang": "GHTK",
-    "matKhauBam": "147c750e28a8c2df$d8a2bec6b0906c33",
+    "matKhauBam": "60fa964035a56de6$d5ae1152ae69793b",
     "tenDangNhap": "GHTK",
     "vaiTro": "Shipper",
     "vi": {
@@ -69,7 +69,7 @@
     "hoTen": "Viettel Post",
     "ma": "SP03",
     "maHang": "ViettelPost",
-    "matKhauBam": "8fd57278ad2e1b99$94906acd5c377583",
+    "matKhauBam": "c9d8aff4d0c17e81$9038e83fd205bb03",
     "tenDangNhap": "VTP",
     "vaiTro": "Shipper",
     "vi": {
@@ -81,8 +81,8 @@
     "biKhoa": false,
     "hoTen": "Quản trị viên",
     "ma": "QL01",
-    "matKhauBam": "6011cab33e6cf2cb$baaaa2d5c1341d53",
-    "tenDangNhap": "admin",
+    "matKhauBam": "9f0dd77c60134895$c73d02bba3fa3d9b",
+    "tenDangNhap": "quanly",
     "vaiTro": "QuanLy"
   }
 ]

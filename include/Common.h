@@ -46,6 +46,7 @@ namespace hangso {
     constexpr double FREESHIP_GIO_TOI_THIEU = 300000;
     constexpr double PHI_THE_TIN_DUNG = 0.015;                       // tính trên (tiền hàng - giảm + ship), khớp web
     constexpr double NAP_TOI_THIEU = 10000, NAP_TOI_DA = 20000000;
+    constexpr double HAN_MUC_THE_MOI_LAN = 50000000;                 // hạn mức một lần quẹt thẻ (giả lập)
     constexpr std::size_t TIN_NHAN_TOI_DA = 500;                    // ký tự
     constexpr std::size_t DIA_CHI_TOI_THIEU = 8;                    // ký tự
     constexpr std::size_t SDT_MIN = 9, SDT_MAX = 11;                // số chữ số
