@@ -1,0 +1,88 @@
+[
+  {
+    "biKhoa": false,
+    "hoTen": "Nguyễn Văn A",
+    "ma": "KH01",
+    "matKhauBam": "71e3cded78c3660b$4b0e2db27183dd13",
+    "tenDangNhap": "khach01",
+    "vaiTro": "KhachHang",
+    "vi": {
+      "lichSu": [],
+      "soDu": 500000.0
+    }
+  },
+  {
+    "biKhoa": false,
+    "hoTen": "Shop Thời Trang",
+    "ma": "NB01",
+    "maShop": "TT",
+    "matKhauBam": "bf08f03512579489$0f426e93457c7083",
+    "tenDangNhap": "TT",
+    "vaiTro": "NguoiBan"
+  },
+  {
+    "biKhoa": false,
+    "hoTen": "Shop Điện Tử",
+    "ma": "NB02",
+    "maShop": "DT",
+    "matKhauBam": "81f8bab53b24fd63$3daa7b91a8d17583",
+    "tenDangNhap": "DT",
+    "vaiTro": "NguoiBan"
+  },
+  {
+    "biKhoa": false,
+    "hoTen": "Shop Nông Sản",
+    "ma": "NB03",
+    "maShop": "NS",
+    "matKhauBam": "37442cef318ee3c3$cc0638702f9e8a83",
+    "tenDangNhap": "NS",
+    "vaiTro": "NguoiBan"
+  },
+  {
+    "biKhoa": false,
+    "hoTen": "Giao Hàng Nhanh",
+    "ma": "SP01",
+    "maHang": "GHN",
+    "matKhauBam": "b8fd91273393fac7$aec1f5e660483383",
+    "tenDangNhap": "GHN",
+    "vaiTro": "Shipper",
+    "vi": {
+      "lichSu": [],
+      "soDu": 0.0
+    }
+  },
+  {
+    "biKhoa": false,
+    "hoTen": "Giao Hàng Tiết Kiệm",
+    "ma": "SP02",
+    "maHang": "GHTK",
+    "matKhauBam": "147c750e28a8c2df$d8a2bec6b0906c33",
+    "tenDangNhap": "GHTK",
+    "vaiTro": "Shipper",
+    "vi": {
+      "lichSu": [],
+      "soDu": 0.0
+    }
+  },
+  {
+    "biKhoa": false,
+    "hoTen": "Viettel Post",
+    "ma": "SP03",
+    "maHang": "ViettelPost",
+    "matKhauBam": "8fd57278ad2e1b99$94906acd5c377583",
+    "tenDangNhap": "VTP",
+    "vaiTro": "Shipper",
+    "vi": {
+      "lichSu": [],
+      "soDu": 0.0
+    }
+  },
+  {
+    "biKhoa": false,
+    "hoTen": "Quản trị viên",
+    "ma": "QL01",
+    "matKhauBam": "6011cab33e6cf2cb$baaaa2d5c1341d53",
+    "tenDangNhap": "admin",
+    "vaiTro": "QuanLy"
+  }
+]
