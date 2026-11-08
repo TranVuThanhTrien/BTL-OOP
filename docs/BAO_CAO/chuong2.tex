@@ -1,0 +1,18 @@
+\chapter{Phân tích và thiết kế hướng đối tượng}
+\section{Phân lớp}
+`SanPham`, `TaiKhoanVi`, `DonViVanChuyen` và `TrangThaiDonHang` nằm ở lớp domain nền. `NguoiDung` là lớp trừu tượng với các lớp khách hàng, người bán, shipper và quản lý. `DonHang` là aggregate root, sở hữu các chi tiết, trạng thái hiện tại, chiến lược thanh toán/vận chuyển/khuyến mãi và lịch sử. `KhoSanPham` quản lý tập sản phẩm; các service điều phối use case; `DataStore` là biên JSON.
+
+\section{Mẫu thiết kế}
+\begin{description}
+  \item[Strategy] `DonViVanChuyen`, `PhuongThucThanhToan` và `KhuyenMai` cung cấp các thuật toán thay thế qua interface chung.
+  \item[Factory] `taoDonVi`, `taoPhuongThuc`, `taoKhuyenMai`, `taoTrangThai` tạo implementation theo mã cấu hình.
+  \item[State] Các lớp `DonMoi`, `DaXacNhan`, `DangGiao`, `HoanTat`, `TraHang` kiểm soát chuyển tiếp hợp lệ.
+  \item[Prototype] `clone()` sao chép trạng thái và chiến lược đa hình trong các thao tác copy của `DonHang`.
+  \item[Composition] Đơn hàng sở hữu chi tiết và các đối tượng nghiệp vụ có vòng đời gắn với đơn.
+\end{description}
+
+\section{Quy tắc nghiệp vụ tiêu biểu}
+Luồng giao là Mới $\rightarrow$ Xác nhận $\rightarrow$ Đang giao $\rightarrow$ Hoàn tất. Hoàn tất cần ảnh do shipper gửi. Trả hàng đi qua yêu cầu của khách, quyết định của shop và bước shipper gửi hàng về. Service kiểm tra quyền theo vai trò; domain bảo vệ bất biến trạng thái. `chotDon()` chụp phí ship để thay đổi bảng giá không làm thay đổi đơn đã đặt.
+
+\section{Sơ đồ}
+Các sơ đồ lớp, use case và sequence được lưu dạng Mermaid tại `docs/UML.md`, đồng bộ với cấu trúc header và luồng service hiện tại.
