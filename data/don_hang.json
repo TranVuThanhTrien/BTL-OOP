@@ -1,1 +1,436 @@
-[]
+[
+    {
+        "anhGiaoHang":  [
+
+                        ],
+        "anhKhieuNai":  [
+
+                        ],
+        "chiTiet":  [
+                        {
+                            "donGia":  120000.0,
+                            "khoiLuong":  0.3,
+                            "maNguoiBan":  "TT",
+                            "maSP":  "AT01",
+                            "soLuong":  1
+                        }
+                    ],
+        "daChot":  true,
+        "daHoanTien":  {
+
+                       },
+        "daTraPhiShip":  false,
+        "diaChiGiao":  {
+                           "diaChi":  "25 Le Van Sy, Quan 3",
+                           "hoTen":  "Nguy?n Van An",
+                           "soDienThoai":  "0901234567"
+                       },
+        "hangVanChuyen":  "GHN",
+        "khoangCachKm":  10.0,
+        "lichSu":  [
+                       {
+                           "thoiDiem":  "2026-11-06 23:40:37",
+                           "trangThai":  "Mới"
+                       }
+                   ],
+        "maDon":  "DH001",
+        "maKhach":  "khach",
+        "maKhuyenMai":  "",
+        "phiShip":  40900.0,
+        "phuongThucThanhToan":  "COD",
+        "thoiDiemDat":  "2026-11-06 23:40:37",
+        "thoiDiemKetThuc":  "",
+        "tinNhan":  [
+
+                    ],
+        "trangThai":  "Mới",
+        "yeuCauTra":  null
+    },
+    {
+        "anhGiaoHang":  null,
+        "anhKhieuNai":  [
+
+                        ],
+        "chiTiet":  [
+                        {
+                            "soLuong":  1,
+                            "donGia":  280000.0,
+                            "maNguoiBan":  "TT",
+                            "khoiLuong":  0.7,
+                            "maSP":  "QJ02"
+                        }
+                    ],
+        "daChot":  true,
+        "daHoanTien":  {
+
+                       },
+        "daTraPhiShip":  false,
+        "diaChiGiao":  {
+                           "diaChi":  "25 Le Van Sy, Quan 3",
+                           "hoTen":  "Nguy?n Van An",
+                           "soDienThoai":  "0901234567"
+                       },
+        "hangVanChuyen":  "GHN",
+        "khoangCachKm":  10.0,
+        "lichSu":  [
+                       {
+                           "trangThai":  "Mới",
+                           "thoiDiem":  "2026-11-07 10:01:00"
+                       },
+                       {
+                           "trangThai":  "Xác nhận",
+                           "thoiDiem":  "2026-11-07 10:01:00"
+                       }
+                   ],
+        "maDon":  "DH-DEMO-002",
+        "maKhach":  "khach",
+        "maKhuyenMai":  "",
+        "phiShip":  31500,
+        "phuongThucThanhToan":  "COD",
+        "thoiDiemDat":  "2026-11-07 10:01:00",
+        "thoiDiemKetThuc":  "",
+        "tinNhan":  [
+
+                    ],
+        "trangThai":  "Xác nhận",
+        "yeuCauTra":  null
+    },
+    {
+        "anhGiaoHang":  null,
+        "anhKhieuNai":  [
+
+                        ],
+        "chiTiet":  [
+                        {
+                            "soLuong":  1,
+                            "donGia":  350000.0,
+                            "maNguoiBan":  "DT",
+                            "khoiLuong":  0.2,
+                            "maSP":  "TN05"
+                        }
+                    ],
+        "daChot":  true,
+        "daHoanTien":  {
+
+                       },
+        "daTraPhiShip":  false,
+        "diaChiGiao":  {
+                           "diaChi":  "25 Le Van Sy, Quan 3",
+                           "hoTen":  "Nguy?n Van An",
+                           "soDienThoai":  "0901234567"
+                       },
+        "hangVanChuyen":  "GHN",
+        "khoangCachKm":  10.0,
+        "lichSu":  [
+                       {
+                           "trangThai":  "Mới",
+                           "thoiDiem":  "2026-11-07 10:02:00"
+                       },
+                       {
+                           "trangThai":  "Xác nhận",
+                           "thoiDiem":  "2026-11-07 10:02:00"
+                       },
+                       {
+                           "trangThai":  "Đang giao",
+                           "thoiDiem":  "2026-11-07 10:02:00"
+                       }
+                   ],
+        "maDon":  "DH-DEMO-003",
+        "maKhach":  "khach",
+        "maKhuyenMai":  "",
+        "phiShip":  33000,
+        "phuongThucThanhToan":  "COD",
+        "thoiDiemDat":  "2026-11-07 10:02:00",
+        "thoiDiemKetThuc":  "",
+        "tinNhan":  [
+
+                    ],
+        "trangThai":  "Đang giao",
+        "yeuCauTra":  null
+    },
+    {
+        "anhGiaoHang":  {
+                            "thoiDiem":  "2026-11-07 10:03:00",
+                            "moTa":  "Ảnh minh họa trạng thái demo",
+                            "duongDan":  ""
+                        },
+        "anhKhieuNai":  [
+
+                        ],
+        "chiTiet":  [
+                        {
+                            "soLuong":  1,
+                            "donGia":  90000.0,
+                            "maNguoiBan":  "NS",
+                            "khoiLuong":  0.5,
+                            "maSP":  "SL09"
+                        }
+                    ],
+        "daChot":  true,
+        "daHoanTien":  {
+
+                       },
+        "daTraPhiShip":  true,
+        "diaChiGiao":  {
+                           "diaChi":  "25 Le Van Sy, Quan 3",
+                           "hoTen":  "Nguy?n Van An",
+                           "soDienThoai":  "0901234567"
+                       },
+        "hangVanChuyen":  "GHN",
+        "khoangCachKm":  10.0,
+        "lichSu":  [
+                       {
+                           "trangThai":  "Mới",
+                           "thoiDiem":  "2026-11-07 10:03:00"
+                       },
+                       {
+                           "trangThai":  "Xác nhận",
+                           "thoiDiem":  "2026-11-07 10:03:00"
+                       },
+                       {
+                           "trangThai":  "Đang giao",
+                           "thoiDiem":  "2026-11-07 10:03:00"
+                       },
+                       {
+                           "trangThai":  "Hoàn tất",
+                           "thoiDiem":  "2026-11-07 10:03:00"
+                       }
+                   ],
+        "maDon":  "DH-DEMO-004",
+        "maKhach":  "khach",
+        "maKhuyenMai":  "",
+        "phiShip":  34500,
+        "phuongThucThanhToan":  "COD",
+        "thoiDiemDat":  "2026-11-07 10:03:00",
+        "thoiDiemKetThuc":  "2026-11-07 10:03:00",
+        "tinNhan":  [
+
+                    ],
+        "trangThai":  "Hoàn tất",
+        "yeuCauTra":  null
+    },
+    {
+        "anhGiaoHang":  {
+                            "thoiDiem":  "2026-11-07 10:04:00",
+                            "moTa":  "Ảnh minh họa trạng thái demo",
+                            "duongDan":  ""
+                        },
+        "anhKhieuNai":  [
+
+                        ],
+        "chiTiet":  [
+                        {
+                            "soLuong":  1,
+                            "donGia":  450000.0,
+                            "maNguoiBan":  "TT",
+                            "khoiLuong":  0.9,
+                            "maSP":  "GS03"
+                        }
+                    ],
+        "daChot":  true,
+        "daHoanTien":  {
+                           "TT":  450000
+                       },
+        "daTraPhiShip":  true,
+        "diaChiGiao":  {
+                           "diaChi":  "25 Le Van Sy, Quan 3",
+                           "hoTen":  "Nguy?n Van An",
+                           "soDienThoai":  "0901234567"
+                       },
+        "hangVanChuyen":  "GHN",
+        "khoangCachKm":  10.0,
+        "lichSu":  [
+                       {
+                           "trangThai":  "Mới",
+                           "thoiDiem":  "2026-11-07 10:04:00"
+                       },
+                       {
+                           "trangThai":  "Xác nhận",
+                           "thoiDiem":  "2026-11-07 10:04:00"
+                       },
+                       {
+                           "trangThai":  "Đang giao",
+                           "thoiDiem":  "2026-11-07 10:04:00"
+                       },
+                       {
+                           "trangThai":  "Hoàn tất",
+                           "thoiDiem":  "2026-11-07 10:04:00"
+                       },
+                       {
+                           "trangThai":  "Trả hàng",
+                           "thoiDiem":  "2026-11-07 10:04:00"
+                       }
+                   ],
+        "maDon":  "DH-DEMO-005",
+        "maKhach":  "khach",
+        "maKhuyenMai":  "",
+        "phiShip":  36000,
+        "phuongThucThanhToan":  "COD",
+        "thoiDiemDat":  "2026-11-07 10:04:00",
+        "thoiDiemKetThuc":  "2026-11-07 10:04:00",
+        "tinNhan":  [
+
+                    ],
+        "trangThai":  "Trả hàng",
+        "yeuCauTra":  {
+                          "thoiDiem":  "2026-11-07 10:04:00",
+                          "trangThai":  3,
+                          "lyDo":  "Sản phẩm lỗi trong bộ dữ liệu minh họa"
+                      }
+    },
+    {
+        "anhGiaoHang":  null,
+        "anhKhieuNai":  [
+
+                        ],
+        "chiTiet":  [
+                        {
+                            "soLuong":  1,
+                            "donGia":  160000.0,
+                            "maNguoiBan":  "DT",
+                            "khoiLuong":  0.15,
+                            "maSP":  "SC06"
+                        }
+                    ],
+        "daChot":  true,
+        "daHoanTien":  {
+
+                       },
+        "daTraPhiShip":  false,
+        "diaChiGiao":  {
+                           "diaChi":  "25 Le Van Sy, Quan 3",
+                           "hoTen":  "Nguy?n Van An",
+                           "soDienThoai":  "0901234567"
+                       },
+        "hangVanChuyen":  "GHN",
+        "khoangCachKm":  10.0,
+        "lichSu":  [
+                       {
+                           "trangThai":  "Mới",
+                           "thoiDiem":  "2026-11-07 10:05:00"
+                       }
+                   ],
+        "maDon":  "DH-DEMO-006",
+        "maKhach":  "khach",
+        "maKhuyenMai":  "",
+        "phiShip":  37500,
+        "phuongThucThanhToan":  "COD",
+        "thoiDiemDat":  "2026-11-07 10:05:00",
+        "thoiDiemKetThuc":  "",
+        "tinNhan":  [
+
+                    ],
+        "trangThai":  "Mới",
+        "yeuCauTra":  null
+    },
+    {
+        "anhGiaoHang":  null,
+        "anhKhieuNai":  [
+
+                        ],
+        "chiTiet":  [
+                        {
+                            "soLuong":  1,
+                            "donGia":  45000.0,
+                            "maNguoiBan":  "NS",
+                            "khoiLuong":  0.2,
+                            "maSP":  "ST10"
+                        }
+                    ],
+        "daChot":  true,
+        "daHoanTien":  {
+
+                       },
+        "daTraPhiShip":  false,
+        "diaChiGiao":  {
+                           "diaChi":  "25 Le Van Sy, Quan 3",
+                           "hoTen":  "Nguy?n Van An",
+                           "soDienThoai":  "0901234567"
+                       },
+        "hangVanChuyen":  "GHN",
+        "khoangCachKm":  10.0,
+        "lichSu":  [
+                       {
+                           "trangThai":  "Mới",
+                           "thoiDiem":  "2026-11-07 10:06:00"
+                       },
+                       {
+                           "trangThai":  "Xác nhận",
+                           "thoiDiem":  "2026-11-07 10:06:00"
+                       }
+                   ],
+        "maDon":  "DH-DEMO-007",
+        "maKhach":  "khach",
+        "maKhuyenMai":  "",
+        "phiShip":  39000,
+        "phuongThucThanhToan":  "COD",
+        "thoiDiemDat":  "2026-11-07 10:06:00",
+        "thoiDiemKetThuc":  "",
+        "tinNhan":  [
+
+                    ],
+        "trangThai":  "Xác nhận",
+        "yeuCauTra":  null
+    },
+    {
+        "anhGiaoHang":  {
+                            "thoiDiem":  "2026-11-07 10:07:00",
+                            "moTa":  "Ảnh minh họa trạng thái demo",
+                            "duongDan":  ""
+                        },
+        "anhKhieuNai":  [
+
+                        ],
+        "chiTiet":  [
+                        {
+                            "soLuong":  1,
+                            "donGia":  210000.0,
+                            "maNguoiBan":  "DT",
+                            "khoiLuong":  0.1,
+                            "maSP":  "CH07"
+                        }
+                    ],
+        "daChot":  true,
+        "daHoanTien":  {
+
+                       },
+        "daTraPhiShip":  true,
+        "diaChiGiao":  {
+                           "diaChi":  "25 Le Van Sy, Quan 3",
+                           "hoTen":  "Nguy?n Van An",
+                           "soDienThoai":  "0901234567"
+                       },
+        "hangVanChuyen":  "GHN",
+        "khoangCachKm":  10.0,
+        "lichSu":  [
+                       {
+                           "trangThai":  "Mới",
+                           "thoiDiem":  "2026-11-07 10:07:00"
+                       },
+                       {
+                           "trangThai":  "Xác nhận",
+                           "thoiDiem":  "2026-11-07 10:07:00"
+                       },
+                       {
+                           "trangThai":  "Đang giao",
+                           "thoiDiem":  "2026-11-07 10:07:00"
+                       },
+                       {
+                           "trangThai":  "Hoàn tất",
+                           "thoiDiem":  "2026-11-07 10:07:00"
+                       }
+                   ],
+        "maDon":  "DH-DEMO-008",
+        "maKhach":  "khach",
+        "maKhuyenMai":  "",
+        "phiShip":  40500,
+        "phuongThucThanhToan":  "ViDienTu",
+        "thoiDiemDat":  "2026-11-07 10:07:00",
+        "thoiDiemKetThuc":  "2026-11-07 10:07:00",
+        "tinNhan":  [
+
+                    ],
+        "trangThai":  "Hoàn tất",
+        "yeuCauTra":  null
+    }
+]

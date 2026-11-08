@@ -1,122 +1,122 @@
 [
   {
+    "daBan": 1241,
+    "danhGia": 4.8,
+    "donGia": 120000.0,
+    "khoiLuong": 0.3,
+    "maNguoiBan": "TT",
     "maSP": "AT01",
     "ten": "Áo thun",
-    "maNguoiBan": "TT",
-    "donGia": 120000,
-    "khoiLuong": 0.3,
-    "tonKho": 30,
-    "daBan": 1240,
-    "danhGia": 4.8
+    "tonKho": 29
   },
   {
+    "daBan": 860,
+    "danhGia": 4.7,
+    "donGia": 280000.0,
+    "khoiLuong": 0.7,
+    "maNguoiBan": "TT",
     "maSP": "QJ02",
     "ten": "Quần jeans",
-    "maNguoiBan": "TT",
-    "donGia": 280000,
-    "khoiLuong": 0.7,
-    "tonKho": 20,
-    "daBan": 860,
-    "danhGia": 4.7
+    "tonKho": 20
   },
   {
+    "daBan": 415,
+    "danhGia": 4.9,
+    "donGia": 450000.0,
+    "khoiLuong": 0.9,
+    "maNguoiBan": "TT",
     "maSP": "GS03",
     "ten": "Giày sneaker",
-    "maNguoiBan": "TT",
-    "donGia": 450000,
-    "khoiLuong": 0.9,
-    "tonKho": 12,
-    "daBan": 415,
-    "danhGia": 4.9
+    "tonKho": 12
   },
   {
+    "daBan": 2300,
+    "danhGia": 4.6,
+    "donGia": 90000.0,
+    "khoiLuong": 0.1,
+    "maNguoiBan": "TT",
     "maSP": "MU04",
     "ten": "Mũ lưỡi trai",
-    "maNguoiBan": "TT",
-    "donGia": 90000,
-    "khoiLuong": 0.1,
-    "tonKho": 40,
-    "daBan": 2300,
-    "danhGia": 4.6
+    "tonKho": 40
   },
   {
+    "daBan": 980,
+    "danhGia": 4.8,
+    "donGia": 350000.0,
+    "khoiLuong": 0.2,
+    "maNguoiBan": "DT",
     "maSP": "TN05",
     "ten": "Tai nghe",
-    "maNguoiBan": "DT",
-    "donGia": 350000,
-    "khoiLuong": 0.2,
-    "tonKho": 15,
-    "daBan": 980,
-    "danhGia": 4.8
+    "tonKho": 15
   },
   {
+    "daBan": 3150,
+    "danhGia": 4.7,
+    "donGia": 160000.0,
+    "khoiLuong": 0.15,
+    "maNguoiBan": "DT",
     "maSP": "SC06",
     "ten": "Sạc nhanh 20W",
-    "maNguoiBan": "DT",
-    "donGia": 160000,
-    "khoiLuong": 0.15,
-    "tonKho": 25,
-    "daBan": 3150,
-    "danhGia": 4.7
+    "tonKho": 25
   },
   {
+    "daBan": 1420,
+    "danhGia": 4.6,
+    "donGia": 210000.0,
+    "khoiLuong": 0.1,
+    "maNguoiBan": "DT",
     "maSP": "CH07",
     "ten": "Chuột không dây",
-    "maNguoiBan": "DT",
-    "donGia": 210000,
-    "khoiLuong": 0.1,
-    "tonKho": 18,
-    "daBan": 1420,
-    "danhGia": 4.6
+    "tonKho": 18
   },
   {
+    "daBan": 530,
+    "danhGia": 4.5,
+    "donGia": 390000.0,
+    "khoiLuong": 0.4,
+    "maNguoiBan": "DT",
     "maSP": "LM08",
     "ten": "Loa mini",
-    "maNguoiBan": "DT",
-    "donGia": 390000,
-    "khoiLuong": 0.4,
-    "tonKho": 10,
-    "daBan": 530,
-    "danhGia": 4.5
+    "tonKho": 10
   },
   {
+    "daBan": 760,
+    "danhGia": 4.9,
+    "donGia": 90000.0,
+    "khoiLuong": 0.5,
+    "maNguoiBan": "NS",
     "maSP": "SL09",
     "ten": "Sách lập trình C++",
-    "maNguoiBan": "NS",
-    "donGia": 90000,
-    "khoiLuong": 0.5,
-    "tonKho": 35,
-    "daBan": 760,
-    "danhGia": 4.9
+    "tonKho": 35
   },
   {
+    "daBan": 4100,
+    "danhGia": 4.8,
+    "donGia": 45000.0,
+    "khoiLuong": 0.2,
+    "maNguoiBan": "NS",
     "maSP": "ST10",
     "ten": "Sổ tay",
-    "maNguoiBan": "NS",
-    "donGia": 45000,
-    "khoiLuong": 0.2,
-    "tonKho": 60,
-    "daBan": 4100,
-    "danhGia": 4.8
+    "tonKho": 60
   },
   {
+    "daBan": 2800,
+    "danhGia": 4.7,
+    "donGia": 60000.0,
+    "khoiLuong": 0.1,
+    "maNguoiBan": "NS",
     "maSP": "BG11",
     "ten": "Bút gel (hộp)",
-    "maNguoiBan": "NS",
-    "donGia": 60000,
-    "khoiLuong": 0.1,
-    "tonKho": 50,
-    "daBan": 2800,
-    "danhGia": 4.7
+    "tonKho": 50
   },
   {
+    "daBan": 1900,
+    "danhGia": 4.6,
+    "donGia": 35000.0,
+    "khoiLuong": 0.2,
+    "maNguoiBan": "NS",
     "maSP": "TT12",
     "ten": "Truyện tranh",
-    "maNguoiBan": "NS",
-    "donGia": 35000,
-    "khoiLuong": 0.2,
-    "tonKho": 0,
-    "daBan": 1900,
-    "danhGia": 4.6
+    "tonKho": 0
   }
 ]
