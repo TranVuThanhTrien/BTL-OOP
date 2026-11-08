@@ -1,5 +1,5 @@
-# Thư mục dữ liệu (file JSON không ghi chú được nên TODO nằm ở đây)
+﻿# Thư mục dữ liệu
 
-- `san_pham.json`: đã có 12 sản phẩm mẫu của 3 shop TT, DT, NS. TODO(C-4): viết `DataStore::docSanPham` đọc đúng file này (khóa: maSP, ten, maNguoiBan, donGia, khoiLuong, tonKho, daBan, danhGia).
-- `don_hang.json`: đang rỗng. TODO(C-5): `luuDonHang` ghi vào đây. TODO(E-9): tạo 5–8 đơn mẫu ở nhiều trạng thái để demo (mỗi đơn có mảng `chiTiet`, `lichSu`, `diaChiGiao`, `yeuCauTra`, `anhGiaoHang`, `anhKhieuNai`, `tinNhan` (mảng {maNguoiGui, vaiTro, noiDung, thoiDiem}), `daHoanTien` (ảnh lưu file trong `data/anh/`, JSON chỉ giữ đường dẫn) và trường `thoiDiemKetThuc`, rỗng nếu chưa kết thúc).
-- `tai_khoan.json`: chưa có. TODO(C-8): tạo khi viết `luuTaiKhoan`, gồm quản lý, 3 shop (TT, DT, NS) và vài khách; mật khẩu phải băm, ví có `soDu` và `lichSu`.
+- `san_pham.json`: 12 sản phẩm mẫu thuộc TT, DT, NS. `DataStore::docSanPham` và `luuSanPham` đọc/ghi file JSON (C-4 đã hoàn thành).
+- `don_hang.json`: đơn hàng do ứng dụng tạo được lưu đầy đủ, gồm chi tiết, trạng thái, địa chỉ, ảnh, trả hàng, chat và thời điểm kết thúc (C-5 đã hoàn thành). E-9 đã hoàn thành: hiện có 8 đơn (đơn gốc và 7 đơn demo) trải trên Mới, Xác nhận, Đang giao, Hoàn tất và Trả hàng. Các đơn demo có mã DH-DEMO-002 đến DH-DEMO-008; giữ chúng tách biệt khi dùng dữ liệu cho demo.
+- `tai_khoan.json`: được tạo khi khởi động nếu chưa có; tài khoản demo có mật khẩu băm, ví và lịch sử giao dịch (C-8 đã hoàn thành).
