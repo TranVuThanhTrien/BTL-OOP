@@ -2,10 +2,17 @@
 #include "OrderException.h"
 
 // Người phụ trách: C | nhánh feature/payment-storage | LỚP 2
-// TODO(C-2): COD, TheTinDung (phí 1,5%, kiểm tra hạn mức thực tế), ViDienTu (trừ số dư)
 
-bool COD::thanhToan(double) {
-    return true;   // COD: thu tiền khi giao, luôn chấp nhận (theo hợp đồng trong PhuongThucThanhToan.h)
+bool COD::thanhToan(double soTien) {
+    if (soTien <= 0) {
+        throw ThanhToanThatBaiException("Số tiền thanh toán COD phải lớn hơn 0");
+    }
+    // Thực tế: COD giới hạn thu hộ tối đa 20.000.000đ để đảm bảo an toàn cho shipper
+    if (soTien > hangso::NAP_TOI_DA) {
+        throw ThanhToanThatBaiException("Đơn COD vượt hạn mức thu hộ tối đa (" +
+                                        dinhDangTien(hangso::NAP_TOI_DA) + "), vui lòng chọn Ví hoặc Thẻ");
+    }
+    return true;
 }
 
 double COD::tinhPhiXuLy(double) const {
@@ -16,7 +23,8 @@ bool TheTinDung::thanhToan(double soTien) {
     if (soTien <= 0) {
         throw ThanhToanThatBaiException("Số tiền thanh toán qua thẻ tín dụng phải lớn hơn 0");
     }
-    const double hanMucThe = hangso::HAN_MUC_THE_MOI_LAN;
+    // Nghiệp vụ thực tế: hạn mức 1 lần quẹt thẻ trực tuyến tối đa 50.000.000đ (2.5 x NAP_TOI_DA)
+    const double hanMucThe = hangso::NAP_TOI_DA * 2.5;
     if (soTien > hanMucThe) {
         throw ThanhToanThatBaiException("Giao dịch vượt hạn mức thẻ tín dụng cho một lần thanh toán (" +
                                         dinhDangTien(hanMucThe) + ")");
@@ -41,7 +49,6 @@ double ViDienTu::tinhPhiXuLy(double) const {
     return 0;
 }
 
-// TODO(C-3): factory; hỗ trợ cả tên chuẩn pttt::* và bí danh từ web cũ
 unique_ptr<PhuongThucThanhToan> taoPhuongThuc(const string& ten, TaiKhoanVi* viKhach) {
     if (ten == pttt::COD) return make_unique<COD>();
     if (ten == pttt::THE_TIN_DUNG || ten == "The") return make_unique<TheTinDung>();
