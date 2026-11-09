@@ -16,5 +16,4 @@ class DaXacNhan : public TrangThaiDonHang { public: void chuyenTiep(DonHang&) ov
 class DangGiao  : public TrangThaiDonHang { public: void chuyenTiep(DonHang&) override; string ten() const override { return tt::DANG_GIAO; }  unique_ptr<TrangThaiDonHang> clone() const override { return make_unique<DangGiao>(*this); } };    // -> Hoàn tất, CHỈ khi don.coAnhGiaoHang() (B-8)
 class HoanTat   : public TrangThaiDonHang { public: void chuyenTiep(DonHang&) override; string ten() const override { return tt::HOAN_TAT; }   unique_ptr<TrangThaiDonHang> clone() const override { return make_unique<HoanTat>(*this); } };     // -> Trả hàng, CHỈ khi don.hangDaVeShop() (đi qua luồng trả hàng; route chung không đi được bước này)
 class TraHang   : public TrangThaiDonHang { public: void chuyenTiep(DonHang&) override; string ten() const override { return tt::TRA_HANG; }   unique_ptr<TrangThaiDonHang> clone() const override { return make_unique<TraHang>(*this); } };     // cuối: luôn ném ChuyenTrangThaiSaiException
-unique_ptr<TrangThaiDonHang> taoTrangThai(const string& ten);   // TODO(B-6) factory theo tt::*; tên lạ -> FileDataException
-// TODO(B-4) cài 5 hàm chuyenTiep trong TrangThaiDonHang.cpp; TODO(B-8), TODO(B-5) như ghi chú ở trên.
+unique_ptr<TrangThaiDonHang> taoTrangThai(const string& ten);
