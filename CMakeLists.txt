@@ -8,7 +8,7 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
 endif()
 file(GLOB LIB_SRC src/*.cpp)
 list(REMOVE_ITEM LIB_SRC ${CMAKE_SOURCE_DIR}/src/main.cpp ${CMAKE_SOURCE_DIR}/src/main_test.cpp)
-add_executable(dt08 src/main.cpp ${LIB_SRC})
+add_executable(dt08 src/main.cpp ${LIB_SRC})//
 add_executable(dt08_test src/main_test.cpp ${LIB_SRC})
 if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang" AND NOT WIN32)
   target_compile_options(dt08_test PRIVATE -fsanitize=address -fno-omit-frame-pointer)
