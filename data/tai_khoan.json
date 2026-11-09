@@ -1,14 +1,56 @@
 [
   {
     "biKhoa": false,
-    "hoTen": "Nguyễn Văn A",
+    "hoTen": "Nguyễn Văn An",
     "ma": "KH01",
-    "matKhauBam": "71e3cded78c3660b$4b0e2db27183dd13",
-    "tenDangNhap": "khach01",
+    "matKhauBam": "4b4eee61e9e13440$9cef4d673638a26b",
+    "tenDangNhap": "khach",
     "vaiTro": "KhachHang",
     "vi": {
-      "lichSu": [],
-      "soDu": 500000.0
+      "lichSu": [
+        {
+          "moTa": "Nạp tiền (Chuyển khoản ngân hàng)",
+          "soTien": 800000.0,
+          "thoiDiem": "2026-11-06 23:39:51"
+        }
+      ],
+      "soDu": 800000.0
+    }
+  },
+  {
+    "biKhoa": false,
+    "hoTen": "Trần Thị Lan",
+    "ma": "KH02",
+    "matKhauBam": "bb710ffbc9a222b7$234c4079b5d174c3",
+    "tenDangNhap": "lan",
+    "vaiTro": "KhachHang",
+    "vi": {
+      "lichSu": [
+        {
+          "moTa": "Nạp tiền (Chuyển khoản ngân hàng)",
+          "soTien": 300000.0,
+          "thoiDiem": "2026-11-06 23:39:51"
+        }
+      ],
+      "soDu": 300000.0
+    }
+  },
+  {
+    "biKhoa": false,
+    "hoTen": "Lê Quốc Minh",
+    "ma": "KH03",
+    "matKhauBam": "5fb483132cc2be3f$e18b1f0a3a5cb123",
+    "tenDangNhap": "minh",
+    "vaiTro": "KhachHang",
+    "vi": {
+      "lichSu": [
+        {
+          "moTa": "Nạp tiền (Chuyển khoản ngân hàng)",
+          "soTien": 150000.0,
+          "thoiDiem": "2026-11-06 23:39:51"
+        }
+      ],
+      "soDu": 150000.0
     }
   },
   {
@@ -16,7 +58,7 @@
     "hoTen": "Shop Thời Trang",
     "ma": "NB01",
     "maShop": "TT",
-    "matKhauBam": "bf08f03512579489$0f426e93457c7083",
+    "matKhauBam": "1bc92b2456293720$4b0a9695f81a13db",
     "tenDangNhap": "TT",
     "vaiTro": "NguoiBan"
   },
@@ -25,25 +67,25 @@
     "hoTen": "Shop Điện Tử",
     "ma": "NB02",
     "maShop": "DT",
-    "matKhauBam": "81f8bab53b24fd63$3daa7b91a8d17583",
+    "matKhauBam": "024e7a11bf04b39e$aefe5684acc04c43",
     "tenDangNhap": "DT",
     "vaiTro": "NguoiBan"
   },
   {
     "biKhoa": false,
-    "hoTen": "Shop Nông Sản",
+    "hoTen": "Nhà Sách",
     "ma": "NB03",
     "maShop": "NS",
-    "matKhauBam": "37442cef318ee3c3$cc0638702f9e8a83",
+    "matKhauBam": "ca0e890143af4b0d$bd8acea3e201b72b",
     "tenDangNhap": "NS",
     "vaiTro": "NguoiBan"
   },
   {
     "biKhoa": false,
-    "hoTen": "Giao Hàng Nhanh",
+    "hoTen": "Shipper GHN",
     "ma": "SP01",
     "maHang": "GHN",
-    "matKhauBam": "b8fd91273393fac7$aec1f5e660483383",
+    "matKhauBam": "682318e0327eb25b$12706694b379034b",
     "tenDangNhap": "GHN",
     "vaiTro": "Shipper",
     "vi": {
@@ -53,10 +95,10 @@
   },
   {
     "biKhoa": false,
-    "hoTen": "Giao Hàng Tiết Kiệm",
+    "hoTen": "Shipper GHTK",
     "ma": "SP02",
     "maHang": "GHTK",
-    "matKhauBam": "147c750e28a8c2df$d8a2bec6b0906c33",
+    "matKhauBam": "6034ca1a290ef0cd$82aac0595c0ee223",
     "tenDangNhap": "GHTK",
     "vaiTro": "Shipper",
     "vi": {
@@ -66,10 +108,10 @@
   },
   {
     "biKhoa": false,
-    "hoTen": "Viettel Post",
+    "hoTen": "Shipper ViettelPost",
     "ma": "SP03",
     "maHang": "ViettelPost",
-    "matKhauBam": "8fd57278ad2e1b99$94906acd5c377583",
+    "matKhauBam": "da294f73dc0a6ac4$5230bfb607dd4443",
     "tenDangNhap": "VTP",
     "vaiTro": "Shipper",
     "vi": {
@@ -79,10 +121,10 @@
   },
   {
     "biKhoa": false,
-    "hoTen": "Quản trị viên",
+    "hoTen": "Trần Minh Quân",
     "ma": "QL01",
-    "matKhauBam": "6011cab33e6cf2cb$baaaa2d5c1341d53",
-    "tenDangNhap": "admin",
+    "matKhauBam": "6be6fe502184c3cf$27624a17b3b2c8e3",
+    "tenDangNhap": "quanly",
     "vaiTro": "QuanLy"
   }
 ]
