@@ -14,6 +14,8 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang" AND NOT WIN32)
   target_compile_options(dt08_test PRIVATE -fsanitize=address -fno-omit-frame-pointer)
   target_link_options(dt08_test PRIVATE -fsanitize=address)
 endif()
+# Test độc lập phần C (ví, thanh toán, tiện ích); không cần code của A, B, D. Chạy: cmake --build build --target dt08_c_test
+add_executable(dt08_c_test tests/test_c.cpp src/Common.cpp src/TaiKhoanVi.cpp src/PhuongThucThanhToan.cpp)
 find_package(Threads REQUIRED)
 target_link_libraries(dt08 Threads::Threads)
 
