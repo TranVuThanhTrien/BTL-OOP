@@ -6,14 +6,14 @@ class AuthService {
     map<string,string> m_phien;                      // token -> tên đăng nhập (viết thường)
     string m_duongDanTaiKhoan;
 public:
-    explicit AuthService(string duongDanTaiKhoan);   // đọc DataStore::docTaiKhoan; chưa có file thì tạo mặc định theo TODO.md (quanly/admin, TT, DT, NS, GHN, GHTK, VTP, khach)
-    string dangNhap(const string& user, const string& pass);   // TODO(D-9) trả token; sai/bị khóa -> DangNhapThatBaiException. Tên đăng nhập KHÔNG phân biệt hoa thường
+    explicit AuthService(string duongDanTaiKhoan);   // đọc DataStore::docTaiKhoan; chưa có file thì tạo mặc định (quanly/admin, TT, DT, NS, GHN, GHTK, VTP, khach)
+    string dangNhap(const string& user, const string& pass);
     void dangXuat(const string& token);
-    NguoiDung& xacThuc(const string& token);         // TODO(D-9) token sai/thiếu -> DangNhapThatBaiException (HTTP 401). Trả non-const vì service cần sửa ví
+    NguoiDung& xacThuc(const string& token);
     void dangKyKhachHang(const string& hoTen, const string& user, const string& pass);
-    void dangKyNguoiBan(const string& tenShop, const string& maShop, const string& pass);   // TODO(D-9,D-12) laMaShopHopLe, tự inHoa, duy nhất; maShop cũng là tên đăng nhập
-    void yeuCauQuyen(const NguoiDung& nd, const string& chucNang) const;   // TODO(D-10) !nd.coQuyen(chucNang) -> KhongCoQuyenException (403)
-    void khoaTaiKhoan(const NguoiDung& nguoiGoi, const string& user, bool khoa);   // TODO(D-10) chỉ QuanLy; ngắt mọi phiên của user bị khóa
+    void dangKyNguoiBan(const string& tenShop, const string& maShop, const string& pass);
+    void yeuCauQuyen(const NguoiDung& nd, const string& chucNang) const;
+    void khoaTaiKhoan(const NguoiDung& nguoiGoi, const string& user, bool khoa);
     // Tra cứu cho DonHangService (không cần token):
     NguoiDung* tim(const string& tenDangNhap);       // nullptr nếu không có
     NguoiDung* timShipperCuaHang(const string& maHang);
