@@ -1,30 +1,186 @@
-// Người phụ trách: D | nhánh feature/web-api
-#include <iostream>    
-// #include "httplib.h"      // TODO(D-5): tải third_party/httplib.h (cpp-httplib)
-// #include "json.hpp"       // TODO(D-5): tải third_party/json.hpp (nlohmann/json)
-// QUYẾT ĐỊNH ĐA LUỒNG: cpp-httplib chạy mỗi request một thread. Dùng MỘT std::mutex toàn cục, mọi handler /api/* bắt đầu bằng std::lock_guard.
-// Các biến tĩnh (bật/tắt khuyến mãi, bảng giá ship) và AuthService/DonHangService đều được bảo vệ bởi khóa này. Không tự khóa lẻ trong từng lớp.
-// QUYẾT ĐỊNH JSON: toàn bộ chuyển đổi DonHang/SanPham/NguoiDung <-> JSON viết ở main.cpp (API) và DataStore.cpp (file); lớp domain/service không biết json.
-// Trước khi đọc tên pttt từ web: web gửi 'The','Vi' -> đổi sang pttt::THE_TIN_DUNG, pttt::VI_DIEN_TU.
-int main() {
-    // TODO(D-5): httplib::Server svr; svr.set_mount_point("/", "./web");
-    // TODO(D-6): các route (xem TODO.md): GET /api/san-pham, POST /api/gio-hang/them, GET /api/gio-hang,
-    //            POST /api/gio-hang/khuyen-mai, POST /api/don-hang/xem-truoc, POST /api/don-hang, GET /api/don-hang,
-    //            GET /api/don-hang/{id}, POST /api/don-hang/{id}/chuyen-trang-thai, GET /api/thong-ke
-    // TODO(D-11): POST /api/dang-nhap, /api/dang-xuat, /api/dang-ky; GET /api/toi (header Authorization: Bearer token)
-    // TODO(D-11): nhóm /api/quan-ly/*: san-pham (GET, POST, PUT, DELETE), khuyen-mai/{ma}/bat-tat, van-chuyen/{hang}, tai-khoan, tai-khoan/{user}/khoa
-    // TODO(D-10): mỗi route gọi AuthService::xacThuc + yeuCauQuyen trước khi xử lý (khách chỉ thấy đơn của mình, người bán chỉ thấy shop mình); thiếu quyền -> HTTP 403
-    // TODO(D-21): GET /api/san-pham?tuKhoa=&maShop=&sapXep=phoBien|moiNhat|banChay|giaTang|giaGiam, mỗi sản phẩm có thêm daBan và danhGia; daBan tăng khi đặt hàng thành công
-    // TODO(D-19): POST /api/don-hang/{id}/nhan-don-tra và /xac-nhan-gui-ve-shop (chỉ shipper đúng hãng; sai bước -> 400, sai quyền -> 403)
-    // TODO(D-20): chat theo đơn: GET /api/tin-nhan (danh sách hội thoại, kèm số tin chưa đọc), GET và POST /api/don-hang/{id}/tin-nhan { noiDung }; người ngoài đơn nhận 403
-    // TODO(D-18): POST /api/don-hang/{id}/xac-nhan-giao { anh (base64) }: bước Đang giao -> Hoàn tất BẮT BUỘC kèm ảnh; route chuyen-trang-thai chung phải từ chối bước này nếu đơn chưa có ảnh giao hàng
-    // TODO(D-17): POST /api/don-hang/{id}/tra-hang { lyDo } · /hoan-hang · /tu-choi-tra-hang · /hoan-tien · /anh-giao-hang · /anh-khieu-nai { anh (base64), moTa }; lỗi quyền -> 403
-    // TODO(D-16): GET /api/giao-hang (chỉ Shipper): MỌI đơn của hãng mình từ trạng thái Mới (đơn Mới chỉ xem), kèm địa chỉ, tiền thu hộ COD và phí ship; gọi DonHangService::layDonGiaoHang
-    // TODO(D-14): xem sản phẩm, giỏ hàng, xem-truoc KHÔNG cần đăng nhập; POST /api/don-hang, /api/vi/*, /api/quan-ly/* cần token, thiếu token trả HTTP 401 (DangNhapThatBaiException); giỏ hàng của khách vãng lai được giữ khi đăng nhập
-    // TODO(D-13): POST /api/don-hang/{id}/ket-thuc (khách chủ đơn, người bán hoặc quản lý đều gọi được); JSON đơn có thêm "daKetThuc" và "thoiDiemKetThuc"
-    // TODO(D-12): ví: GET /api/vi, POST /api/vi/nap-tien { soTien, nguon }, GET /api/vi/giao-dich
-    // TODO(D-7): bắt OrderException -> res.status = e.maHttp() (400 mặc định, 401 DangNhapThatBai, 403 KhongCoQuyen, 500 FileData), JSON { "loi": e.loai(), "thongBao": e.what() }
-    // TODO(D-5): svr.listen("0.0.0.0", 8080);
-    std::cout << "ĐT08: bộ khung đã build được, hãy cài đặt các TODO\n";
-    return 0;
+#include "DonHangService.h"
+#include "ThongKeService.h"
+#include "OrderException.h"
+#include <iomanip>
+#include <limits>
+#ifdef _WIN32
+#include <windows.h>
+#endif
+
+namespace {
+string docDong(const string& nhac) {
+    std::cout << nhac;
+    string s;
+    std::getline(std::cin, s);
+    return s;
+}
+
+int docSo(const string& nhac, int macDinh = 0) {
+    string s = docDong(nhac);
+    if (s.empty()) return macDinh;
+    try { return std::stoi(s); } catch (...) { return macDinh; }
+}
+
+double docSoThuc(const string& nhac, double macDinh = 0) {
+    string s = docDong(nhac);
+    if (s.empty()) return macDinh;
+    try { return std::stod(s); } catch (...) { return macDinh; }
+}
+
+void hienThiSanPham(const KhoSanPham& kho) {
+    std::cout << "\n=== DANH SÁCH SẢN PHẨM ===\n";
+    for (const auto& sp : kho.tatCa()) {
+        std::cout << std::left << std::setw(7) << sp.ma() << std::setw(26) << sp.ten()
+                  << "Shop " << sp.maNguoiBan() << " | " << dinhDangTien(sp.donGia())
+                  << " | tồn " << sp.tonKho() << " | ★ " << sp.danhGia() << "\n";
+    }
+}
+
+void hienThiGio(const GioHang& gio) {
+    if (gio.rong()) { std::cout << "Giỏ hàng đang trống.\n"; return; }
+    for (const auto& d : gio.dongHang()) {
+        std::cout << d.first.ma() << " - " << d.first.ten() << " x" << d.second
+                  << " = " << dinhDangTien(d.first.donGia() * d.second) << "\n";
+    }
+    std::cout << "Tạm tính: " << dinhDangTien(gio.tinhTongTien())
+              << " | khối lượng: " << gio.tinhTongKhoiLuong() << " kg\n";
+}
+
+void hienThiDon(const DonHang& d) {
+    std::cout << d << " | Hãng: " << d.hangVanChuyen()
+              << " | Đặt lúc: " << d.thoiDiemDat() << "\n";
+    for (const auto& ct : d.chiTiet())
+        std::cout << "  - " << ct->maSP() << " x" << ct->soLuong()
+                  << " = " << dinhDangTien(ct->tinhThanhTien()) << "\n";
+}
+
+bool dangNhap(AuthService& auth, NguoiDung*& nguoi, string& token) {
+    const string user = docDong("Tên đăng nhập: ");
+    const string pass = docDong("Mật khẩu: ");
+    token = auth.dangNhap(user, pass);
+    nguoi = &auth.xacThuc(token);
+    std::cout << "Xin chào " << nguoi->hoTen() << " (" << nguoi->vaiTro() << ").\n";
+    return true;
+}
+
+void hienThiDonCuaNguoi(DonHangService& donHang, const NguoiDung& nguoi) {
+    auto ds = donHang.layDanhSach(nguoi);
+    if (ds.empty()) { std::cout << "Chưa có đơn hàng.\n"; return; }
+    for (const DonHang* d : ds) hienThiDon(*d);
+}
+
+void menuKhach(KhoSanPham& kho, DonHangService& donHang, NguoiDung& nguoi, GioHang& gio) {
+    while (true) {
+        std::cout << "\n=== KHÁCH HÀNG ===\n1. Xem sản phẩm\n2. Thêm vào giỏ\n3. Xem giỏ\n"
+                     "4. Thanh toán\n5. Đơn của tôi\n6. Ví của tôi\n7. Đăng xuất\n0. Thoát\n";
+        int chon = docSo("Chọn: ");
+        try {
+            if (chon == 0) return;
+            if (chon == 1) hienThiSanPham(kho);
+            else if (chon == 2) {
+                string ma = docDong("Mã sản phẩm: ");
+                int sl = docSo("Số lượng: ", 1);
+                gio.themSanPham(kho.lay(ma), sl);
+                std::cout << "Đã cập nhật giỏ hàng.\n";
+            } else if (chon == 3) hienThiGio(gio);
+            else if (chon == 4) {
+                if (gio.rong()) { std::cout << "Giỏ hàng trống.\n"; continue; }
+                double km = docSoThuc("Khoảng cách giao hàng (km): ", 10);
+                string hangVanChuyen = docDong("Hãng (GHN/GHTK/ViettelPost, Enter = rẻ nhất): ");
+                if (hangVanChuyen.empty()) hangVanChuyen = timHangReNhat(km, gio.tinhTongKhoiLuong());
+                string pt = docDong("Thanh toán COD/TheTinDung/ViDienTu [COD]: ");
+                if (pt.empty()) pt = pttt::COD;
+                string maKM = docDong("Mã khuyến mãi (Enter nếu không có): ");
+                auto kq = donHang.xemTruoc(gio, hangVanChuyen, pt, maKM, km);
+                std::cout << "Tiền hàng " << dinhDangTien(kq.tienHang) << " | giảm " << dinhDangTien(kq.giamGia)
+                          << " | ship " << dinhDangTien(kq.phiShip) << " | phí xử lý " << dinhDangTien(kq.phiXuLy)
+                          << " | tổng " << dinhDangTien(kq.tongThanhToan) << "\n";
+                if (docDong("Xác nhận đặt hàng? (y/N): ") != "y") continue;
+                DiaChi dc;
+                if (auto* kh = dynamic_cast<KhachHang*>(&nguoi)) dc = kh->diaChi();
+                if (dc.hoTen.empty()) dc.hoTen = nguoi.hoTen();
+                if (dc.soDienThoai.empty()) dc.soDienThoai = docDong("Số điện thoại: ");
+                if (dc.diaChi.empty()) dc.diaChi = docDong("Địa chỉ giao hàng: ");
+                const DonHang& d = donHang.taoDon(nguoi, gio, dc, hangVanChuyen, pt, maKM, km);
+                hienThiDon(d);
+            } else if (chon == 5) hienThiDonCuaNguoi(donHang, nguoi);
+            else if (chon == 6) {
+                const auto* vi = nguoi.vi();
+                std::cout << "Số dư: " << (vi ? dinhDangTien(vi->soDu()) : "Không có ví") << "\n";
+                if (vi) for (const auto& gd : vi->lichSu())
+                    std::cout << "  " << gd.thoiDiem << " | " << gd.moTa << " | " << dinhDangTien(gd.soTien) << "\n";
+            } else if (chon == 7) return;
+            else std::cout << "Lựa chọn không hợp lệ.\n";
+        } catch (const OrderException& e) { std::cout << "Lỗi: " << e.what() << "\n"; }
+    }
+}
+
+void menuNhanVien(DonHangService& donHang, NguoiDung& nguoi) {
+    while (true) {
+        std::cout << "\n=== " << nguoi.vaiTro() << " ===\n1. Xem đơn\n2. Chuyển trạng thái đơn\n"
+                     "3. Thống kê (quản lý)\n4. Đăng xuất\n0. Thoát\n";
+        int chon = docSo("Chọn: ");
+        try {
+            if (chon == 0) return;
+            if (chon == 1) hienThiDonCuaNguoi(donHang, nguoi);
+            else if (chon == 2) {
+                string ma = docDong("Mã đơn: ");
+                donHang.chuyenTrangThai(ma, nguoi);
+                std::cout << "Đã chuyển trạng thái thành công.\n";
+            } else if (chon == 3 && nguoi.vaiTro() == vaitro::QUAN_LY) {
+                const auto& ds = donHang.tatCaDon();
+                std::cout << "Tỷ lệ giao thành công: " << ThongKeService::tyLeGiaoThanhCong(ds)
+                          << "% | tỷ lệ trả hàng: " << ThongKeService::tyLeHoanHang(ds) << "%\n";
+                for (const auto& kv : ThongKeService::doanhThuTheoNguoiBan(ds))
+                    std::cout << kv.first << ": " << dinhDangTien(kv.second) << "\n";
+            } else if (chon == 4) return;
+            else std::cout << "Lựa chọn không hợp lệ.\n";
+        } catch (const OrderException& e) { std::cout << "Lỗi: " << e.what() << "\n"; }
+    }
+}
+}
+
+int runConsole() {
+#ifdef _WIN32
+    // Nội dung giao diện và dữ liệu nguồn đều dùng UTF-8.
+    SetConsoleOutputCP(CP_UTF8);
+    SetConsoleCP(CP_UTF8);
+#endif
+    try {
+        KhoSanPham kho(DataStore::docSanPham("data/san_pham.json"));
+        AuthService auth("data/tai_khoan.json");
+        DonHangService donHang(kho, auth, "data/don_hang.json");
+        string maGio = donHang.taoMaGio();
+        GioHang& gio = donHang.gio(maGio);
+        std::cout << "ĐT08 - Cửa hàng trực tuyến (console)\n"
+                     "Tài khoản demo: khach/123, TT/123, DT/123, NS/123, GHN/123, GHTK/123, VTP/123, quanly/admin\n";
+        while (true) {
+            std::cout << "\n1. Xem sản phẩm\n2. Đăng nhập\n0. Thoát\n";
+            int chon = docSo("Chọn: ");
+            if (!std::cin || chon == 0) break;
+            try {
+                if (chon == 1) hienThiSanPham(kho);
+                else if (chon == 2) {
+                    NguoiDung* nguoi = nullptr;
+                    string token;
+                    dangNhap(auth, nguoi, token);
+                    if (nguoi->vaiTro() == vaitro::KHACH_HANG) menuKhach(kho, donHang, *nguoi, gio);
+                    else menuNhanVien(donHang, *nguoi);
+                    auth.dangXuat(token);
+                } else std::cout << "Lựa chọn không hợp lệ.\n";
+            } catch (const OrderException& e) { std::cout << "Lỗi: " << e.what() << "\n"; }
+        }
+        auth.luu();
+        return 0;
+    } catch (const std::exception& e) {
+        std::cerr << "Không khởi tạo được ứng dụng: " << e.what() << "\n";
+        return 1;
+    }
+}
+
+int runHttpServer();
+
+int main(int argc, char** argv) {
+    if (argc > 1 && string(argv[1]) == "--console") return runConsole();
+    return runHttpServer();
 }
