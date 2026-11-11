@@ -13,13 +13,13 @@ class GioHang {
 public:
     const vector<pair<SanPham,int>>& dongHang() const { return m_dongHang; }
     bool rong() const { return m_dongHang.empty(); }
-    void themSanPham(const SanPham& sp, int soLuong);      // TODO(A-4): cộng dồn nếu đã có; vượt tồn kho -> HetHangException; soLuong <= 0 -> OrderException
-    void capNhatSoLuong(const string& maSP, int soLuong);  // TODO(A-4): 0 = xóa dòng
-    void xoaSanPham(const string& maSP);                   // TODO(A-4)
-    void lamTrong();                                       // TODO(A-4)
-    double tinhTongTien() const;                           // TODO(A-5)
-    double tinhTongKhoiLuong() const;                      // TODO(A-5)
-    int    demNguoiBan() const;                            // TODO(A-5)
-    map<string,double> tongTheoNguoiBan() const;           // TODO(A-5)
-    TomTatGio tomTat() const;                              // TODO(A-5): gom 4 hàm trên
+    void themSanPham(const SanPham& sp, int soLuong);
+    void capNhatSoLuong(const string& maSP, int soLuong);
+    void xoaSanPham(const string& maSP);
+    void lamTrong();
+    double tinhTongTien() const;
+    double tinhTongKhoiLuong() const;
+    int    demNguoiBan() const;
+    map<string,double> tongTheoNguoiBan() const;
+    TomTatGio tomTat() const;
 };

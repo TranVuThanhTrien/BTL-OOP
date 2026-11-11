@@ -2,7 +2,6 @@
 #include "OrderException.h"
 
 // Người phụ trách: C | nhánh feature/payment-storage | LỚP 2
-// TODO(C-2): COD, TheTinDung (phí 1,5%, kiểm tra hạn mức thực tế), ViDienTu (trừ số dư)
 
 bool COD::thanhToan(double) {
     return true;   // COD: thu tiền khi giao, luôn chấp nhận (theo hợp đồng trong PhuongThucThanhToan.h)
@@ -41,7 +40,6 @@ double ViDienTu::tinhPhiXuLy(double) const {
     return 0;
 }
 
-// TODO(C-3): factory; hỗ trợ cả tên chuẩn pttt::* và bí danh từ web cũ
 unique_ptr<PhuongThucThanhToan> taoPhuongThuc(const string& ten, TaiKhoanVi* viKhach) {
     if (ten == pttt::COD) return make_unique<COD>();
     if (ten == pttt::THE_TIN_DUNG || ten == "The") return make_unique<TheTinDung>();

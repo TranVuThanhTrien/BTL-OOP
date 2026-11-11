@@ -1,0 +1,12 @@
+\chapter{Triển khai hệ thống}
+\section{Kiến trúc chương trình}
+Web tĩnh trong `web/` gọi các route `/api/*`. `main.cpp` chuyển đổi request/response JSON và gọi `AuthService`, `DonHangService`, `ThongKeService` hoặc `KhoSanPham`. Lớp nghiệp vụ không phụ thuộc giao thức. Một mutex bao quanh các handler để bảo vệ service dùng chung khi cpp-httplib xử lý request đồng thời.
+
+\section{Đặt hàng và thanh toán}
+Service đọc giỏ, kiểm tra tồn và địa chỉ, dựng aggregate đơn, chốt phí ship và khuyến mãi, sau đó thanh toán. Khi thành công mới trừ kho, tăng số đã bán và lưu dữ liệu. `xemTruoc()` và đơn chính thức dùng chung phép tính `DonHang::tinhKetQua()`.
+
+\section{API, xác thực và phân quyền}
+HTTP API trả JSON, dùng token đăng nhập để xác định người gọi; giỏ khách vãng lai gắn mã giỏ qua header. Service lọc danh sách/chi tiết đơn theo khách, shop, hãng vận chuyển hoặc quản lý, đồng thời kiểm tra quyền của thao tác cập nhật.
+
+\section{Lưu trữ}
+`DataStore` đọc và ghi `data/san_pham.json`, `data/don_hang.json`, `data/tai_khoan.json`. Tệp JSON được ghi qua tệp tạm rồi thay thế. Ảnh được lưu dạng đường dẫn; cấu hình bảng phí và trạng thái khuyến mãi hiện ở bộ nhớ và trở về mặc định khi khởi động lại.

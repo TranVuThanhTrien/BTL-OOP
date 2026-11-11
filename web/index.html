@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<!-- Người phụ trách: E | TODO(E-1..E-32): giao diện mẫu chạy bằng dữ liệu mô phỏng, xem danh sách việc trong TODO.md. Việc lớn nhất là E-6: thay khối "Api mô phỏng" bằng fetch() tới server C++ -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>ĐT08.vn – Mua sắm trực tuyến & Giao vận định vị tự động</title>
@@ -460,7 +459,6 @@ const TTS=['Mới','Xác nhận','Đang giao','Hoàn tất','Trả hàng'];
 class Loi extends Error{constructor(loi,tb){super(tb);this.loi=loi}}
 const S={cart:{},ma:'',vi:800000,orders:[],seq:1,kmOff:{}};let cur=0,fl='*',q='',sel=null,km=4.5,hang='GHN',pt='COD';
 
-/* TODO(E-6): thay các hàm tinh, datHang, chuyenTrangThai, ketThuc, thongKe, dangNhap, dangKy, nạp ví, trả hàng, hoàn tiền, gửi ảnh, xác nhận giao, chat, danh sách sản phẩm bằng fetch() tới API C++ */
 const items=()=>Object.entries(S.cart).map(([id,n])=>({...P.find(p=>p.id==id),q:n})).filter(x=>x.id);
 function tinh(it,h,k,p,ma){
  const hg=it.reduce((a,x)=>a+x.gia*x.q,0),
@@ -592,7 +590,7 @@ function vDetail(){
 function vCart(){
  const it=items(),g={};it.forEach(x=>(g[x.sh]=g[x.sh]||[]).push(x));
  if(!it.length){$$('s1').innerHTML=empty('Giỏ hàng ĐT08 của bạn đang trống','Hãy khám phá các ưu đãi hôm nay và thêm sản phẩm vào giỏ.');return}
- let r,err='';try{r=tinh(it,'GHN',km,'COD',S.ma)}catch(e){err=e.message;S.ma='';r=tinh(it,'GHN',km,'COD','')}
+ let r,err='';try{r=tinh(it,'GHN',km,'COD',S.ma)}catch(e){err=e.message;r=tinh(it,'GHN',km,'COD','')}
  const gr=Object.keys(g).map(k=>`<div class="card mb"><div class="row2" style="margin:0 0 8px"><div><b>🏪 Kiện hàng từ ${SHOPS[k]}</b><div class="mu">📍 Kho cố định: ${SDC[k]}</div></div><span class="mu">Tạm tính shop: <b>${fmt(g[k].reduce((a,x)=>a+x.gia*x.q,0))}</b></span></div>${g[k].map(x=>`<div class="cr"><div class="ic t${x.sh}">${renderThumb(x)}</div><div class="nm"><b>${x.ten}</b><div style="color:var(--ok);font-size:12px">Còn hàng · Khối lượng ${x.kg} kg</div><div class="mu">Đơn giá: ${fmt(x.gia)}</div></div><div class="st"><button data-a="dec" data-id="${x.id}">−</button><b>${x.q}</b><button data-a="inc" data-id="${x.id}">+</button></div><b style="min-width:95px;text-align:right;font-size:16px">${fmt(x.gia*x.q)}</b><button class="x" data-a="del" data-id="${x.id}">Xóa</button></div>`).join('')}</div>`).join('');
  $$('s1').innerHTML=`<div class="two"><div><h2 class="h">Giỏ hàng mua sắm</h2>${gr}</div><div><div class="card mb"><b>🎟️ Mã khuyến mãi / Voucher</b><div class="row2" style="margin:10px 0"><input id="mk" placeholder="Nhập mã (GIAM10, GIAM30K...)" value="${S.ma}" style="flex:1;min-width:0"><button class="btn amz-add" data-a="km">Áp dụng</button></div><div class="mu" style="color:${err?'var(--er)':'var(--ok)'}">${err||(S.ma?'✔ Đã áp dụng mã '+S.ma+'':'')}${S.ma=='FREESHIP'?' <button class="lk" data-a="rmkm">(Bỏ FREESHIP)</button>':''}</div>${Object.keys(COUPON).filter(c=>!S.kmOff[c]).map(c=>`<div class="cp" data-a="mk" data-id="${c}"><b>${c}</b> · ${COUPON[c]}</div>`).join('')}</div><div class="card">${row('Tiền hàng ('+r.nb+' nhà bán)',fmt(r.hg))}${row('Giảm giá voucher',fmt(-r.giam))}${row('Tổng tạm tính',fmt(r.hg-r.giam),1)}<button class="btn amz-add" data-a="nav" data-n="2" style="width:100%;margin-top:12px;padding:11px">Tiến hành thanh toán →</button></div></div></div>`}
 
@@ -775,6 +773,7 @@ function vAprod(){
    ${Object.entries(SHOPS).filter(([k])=>ME.role!='NguoiBan'||k==ME.shop).map(([k,v])=>`<div class="addr" style="margin:0"><b>🏪 ${v} (${k})</b><br>📍 ${SDC[k]}<br><small class="mu">GPS cố định: ${(SHOP_GPS[k]||{}).lat}, ${(SHOP_GPS[k]||{}).lng}</small></div>`).join('')}
   </div>
  </div>
+ ${ME.role=='NguoiBan'?`<div class="card mb"><b>Địa chỉ lấy hàng của shop</b><div class="fg"><label>Người liên hệ<input id="shop-dc-ten" value="${ME.shopAddress?.hoTen||ME.ten}"></label><label>Số điện thoại<input id="shop-dc-sdt" value="${ME.shopAddress?.soDienThoai||''}"></label></div><label>Địa chỉ kho<input id="shop-dc-diachi" value="${ME.shopAddress?.diaChi||''}" style="width:100%"></label><button class="btn amz-add" data-a="shopaddr" style="margin-top:8px">Lưu địa chỉ lấy hàng</button></div>`:''}
  <div class="card mb"><b>${ed?'Chỉnh sửa sản phẩm '+ed:'Thêm sản phẩm mới lên kệ'}</b><div class="fg">${[['ten','Tên sản phẩm',e.ten],['gia','Giá niêm yết (đ)',e.gia],['kg','Khối lượng (kg)',e.kg],['ton','Số lượng tồn kho',e.ton],['ic','Ảnh (URL https / img/... / Emoji)',e.ic]].map(([k,l,v])=>`<label>${l}<input id="pf-${k}" value="${v}" placeholder="${k=='ic'?'https://... hoặc img/AT01.jpg hoặc 📦':''}"></label>`).join('')}${ME.role=='QuanLy'?`<label>Gian hàng<select id="pf-sh">${Object.entries(SHOPS).map(([k,v])=>`<option value="${k}"${e.sh==k?' selected':''}>${v}</option>`).join('')}</select></label>`:''}</div><div class="row2" style="justify-content:space-between;flex-wrap:wrap"><span class="mu">💡 Khung ảnh sản phẩm đã tự động chống méo (<code>object-fit: cover</code>). Nên chọn ảnh tỉ lệ vuông 1:1.</span><div style="display:flex;gap:8px"><button class="btn amz-add" data-a="ps">${ed?'Lưu cập nhật':'Đăng sản phẩm'}</button>${ed?'<button class="sm2" data-a="pc">Hủy</button>':''}</div></div></div><div class="card tw"><table><tr><th>Ảnh</th><th>Tên &amp; Mã SP</th><th>Gian hàng</th><th>Đơn giá</th><th>Tồn kho</th><th>Thao tác</th></tr>${L.map(p=>`<tr><td><div class="ic t${p.sh}" style="width:50px;height:50px;font-size:22px;margin:0">${renderThumb(p)}</div></td><td><b>${p.ten}</b><div class="mu">Mã: ${p.id} · ${p.kg} kg · Đã bán: ${p.sold||0}</div></td><td>${SHOPS[p.sh]}</td><td><b>${fmt(p.gia)}</b></td><td><span class="bd ${p.ton==0?'b4':p.ton<=5?'b2':'b3'}">${p.ton}</span></td><td style="white-space:nowrap"><button class="sm2" data-a="pn" data-id="${p.id}">+10 kho</button> <button class="sm2" data-a="pe" data-id="${p.id}">Sửa</button> <button class="sm2" data-a="pd" data-id="${p.id}">Xóa</button></td></tr>`).join('')}</table></div>`}
 
 function vAkm(){$$('s8').innerHTML=`<h2 class="h">Quản lý Chiến dịch Khuyến mãi</h2><div class="card tw"><table><tr><th>Mã Voucher</th><th>Điều kiện &amp; Mức giảm</th><th>Số đơn đã áp dụng</th><th>Trạng thái</th></tr>${Object.keys(COUPON).map(c=>`<tr><td><b style="color:var(--ac-h)">${c}</b></td><td>${COUPON[c]}</td><td>${S.orders.filter(o=>o.ma==c).length} đơn</td><td><button class="sm2" data-a="kt" data-id="${c}">${S.kmOff[c]?'Đang tắt · Bật':'Đang hoạt động · Tắt'}</button></td></tr>`).join('')}</table></div><p class="mu">Ba mã tương ứng các lớp <code>KMPhanTram</code>, <code>KMGiamTien</code>, <code>KMFreeShip</code> trong C++.</p>`}
@@ -918,7 +917,7 @@ function vShip(){
  $$('shot').innerHTML=R.length?`<table><tr><th>Mã đơn</th><th>Khách nhận</th><th>Địa chỉ giao</th><th>Quãng đường</th><th>Thu hộ COD</th><th>Phí ship</th><th>Trạng thái</th></tr>${R.map(o=>`<tr class="s${sel==o.id?' on':''}" data-a="sel" data-id="${o.id}"><td><b>#${o.id}</b></td><td>${nameOf(o.kh)}</td><td style="max-width:160px;overflow:hidden;text-overflow:ellipsis">${(o.dc&&o.dc.diaChi)||'—'}</td><td>${o.k} km</td><td>${o.p=='COD'?`<b>${fmt(o.r.tong)}</b>`:'Đã trả trước'}</td><td>${fmt(o.r.ship)}</td><td>${bdg(o)}</td></tr>`).join('')}</table>`:empty('Chưa có đơn hàng nào','Đơn thuộc hãng của bạn sẽ hiển thị ngay khi khách đặt');
  const o=R.find(x=>x.id==sel);OD().innerHTML=o?detail(o):empty('Chọn một vận đơn','để xem bản đồ địa chỉ lấy/giao, nhận giao hoặc chụp ảnh xác nhận')}
 let cc=null,trOpen=null,trImg=null,trF={};
-const unread=o=>(o.chat||[]).filter((m,i)=>m.u!=ME.u&&i>=((ME.seen||{})[o.id]||0)).length,RL={KhachHang:'Khách',NguoiBan:'Shop',Shipper:'Shipper',QuanLy:'Quản lý'};
+const unread=o=>ME?.unreadByOrder?ME.unreadByOrder[o.id]||0:(o.chat||[]).filter((m,i)=>m.u!=ME.u&&i>=((ME.seen||{})[o.id]||0)).length,RL={KhachHang:'Khách',NguoiBan:'Shop',Shipper:'Shipper',QuanLy:'Quản lý'};
 function chatBadge(){const e=$$('cc');if(!e||!ME||ME.guest)return;const n=scope().reduce((a,o)=>a+unread(o),0);e.textContent=n||''}
 function vChat(){
  const L=scope(),last=o=>o.chat.length?+o.chat[o.chat.length-1].t:0,S2=[...L].sort((a,b)=>last(b)-last(a));
@@ -966,6 +965,170 @@ const SAMPLE_ADDRS=[
  if(i<2)o.kt=new Date(t0+(st+1)*6*36e5);
 });
 vao(GUEST);
+
+/* E-6: API thật cho các luồng mua hàng, tài khoản và xử lý đơn. */
+const DT08_API={token:localStorage.getItem('dt08-token')||'',cart:localStorage.getItem('dt08-cart')||''};
+async function apiCall(path,method='GET',body=null){
+ const headers={'Accept':'application/json'};
+ if(body!==null)headers['Content-Type']='application/json';
+ if(DT08_API.token)headers.Authorization='Bearer '+DT08_API.token;
+ if(DT08_API.cart)headers['X-Gio-Hang']=DT08_API.cart;
+ const response=await fetch(path,{method,headers,body:body===null?undefined:JSON.stringify(body)});
+ const cart=response.headers.get('X-Gio-Hang');if(cart){DT08_API.cart=cart;localStorage.setItem('dt08-cart',cart)}
+ const data=await response.json().catch(()=>({}));
+ if(!response.ok)throw new Loi(data.loi||'ApiException',data.thongBao||('HTTP '+response.status));
+ return data;
+}
+function apiImageUrl(path){const clean=String(path||'').replace(/\\/g,'/').replace(/^\.?\//,'');return clean.startsWith('data/anh/')?'/anh/'+clean.slice('data/anh/'.length):'/'+clean}
+function apiOrder(x){
+ const state={};(x.ht||{}).constructor===Object&&Object.entries(x.ht||{}).forEach(([k,v])=>state[k]=v);
+ const traState=['cho','cho_ship','dang_tra','dong','tuchoi'];
+ return {id:x.id||x.maDon,kh:x.kh,tenKhach:x.tenKhach,h:x.h||x.hangVanChuyen,p:x.p||'COD',ma:x.ma||'',k:x.k||0,st:x.st??0,
+  items:(x.items||x.chiTiet||[]).map(i=>({id:i.id||i.maSP,sh:i.sh||i.maNguoiBan,ten:i.ten||i.maSP,gia:i.gia??i.donGia,q:i.q??i.soLuong,kg:i.kg||0})),
+  r:{hg:x.r?.hg??x.r?.tienHang??0,giam:x.r?.giam??x.r?.giamGia??0,ship:x.r?.ship??x.r?.phiShip??0,phi:x.r?.phi??x.r?.phiXuLy??0,tong:x.r?.tong??x.r?.tongThanhToan??0,kg:x.r?.kg??x.r?.khoiLuong??0},
+  ls:(x.ls||x.lichSu||[]).map(v=>({tt:v.tt||v.trangThai,t:v.t||v.thoiDiem})),dc:{ten:x.dc?.ten||x.dc?.hoTen||'',sdt:x.dc?.sdt||x.dc?.soDienThoai||'',diaChi:x.dc?.diaChi||''},
+  tra:x.tra?{ly:x.tra.lyDo||'',t:x.tra.thoiDiem,tt:traState[x.tra.trangThai]||'cho'}:null,
+  ht:state,ag:(x.ag||x.anhGiaoHang||[]).map(a=>({src:apiImageUrl(a.duongDan),nd:a.moTa||'',t:a.thoiDiem})),
+  kn:(x.kn||x.anhKhieuNai||[]).map(a=>({src:apiImageUrl(a.duongDan),nd:a.moTa||'',t:a.thoiDiem})),
+  chat:(x.chat||x.tinNhan||[]).map(m=>({u:m.maNguoiGui,ten:m.tenNguoiGui||m.maNguoiGui,role:m.vaiTro,nd:m.noiDung,t:m.thoiDiem})),kt:x.kt||x.thoiDiemKetThuc||'',sp:x.sp||false};
+}
+function apiMergeProducts(list){const old=new Map(P.map(p=>[p.id,p]));P.splice(0,P.length,...list.map(p=>({...old.get(p.id||p.maSP),id:p.id||p.maSP,sh:p.sh||p.maNguoiBan,ten:p.ten,gia:p.gia??p.donGia,kg:p.kg??p.khoiLuong,ton:p.ton??p.tonKho,sold:p.sold??p.daBan??0,rate:p.rate??p.danhGia??0,ic:old.get(p.id||p.maSP)?.ic||'📦'})))}
+function apiProductUrl(){const params=new URLSearchParams(),word=($$('hq')?.value||'').trim();if(word)params.set('tuKhoa',word);if(fl&&fl!=='*')params.set('maShop',fl);const ordering={pop:'phoBien',new:'moiNhat',sold:'banChay',pa:'giaTang',pd:'giaGiam'}[sort];if(ordering)params.set('sapXep',ordering);const query=params.toString();return '/api/san-pham'+(query?'?'+query:'')}
+let apiProductTimer=0;
+async function apiLoadProducts(){apiMergeProducts(await apiCall(apiProductUrl()));if(cur===0)updProduct()}
+async function apiRefresh(){
+ const products=await apiCall('/api/san-pham');apiMergeProducts(products);
+ if(DT08_API.token){const route=ME?.role==='Shipper'?'/api/giao-hang':'/api/don-hang';S.orders=(await apiCall(route)).map(apiOrder);const wallet=await apiCall('/api/vi').catch(()=>null);if(wallet&&ME){ME.vi=wallet.soDu;ME.gd=(wallet.lichSu||[]).map(g=>({m:g.moTa,v:g.soTien,t:g.thoiDiem}))}const inbox=await apiCall('/api/tin-nhan').catch(()=>[]);if(ME)ME.unreadByOrder=Object.fromEntries(inbox.map(x=>[x.maDon,x.soTinChuaDoc]));
+  if(ME?.role==='NguoiBan'){const pickup=await apiCall('/api/shop/dia-chi-lay-hang');ME.shopAddress=pickup.diaChiLayHang||{}}
+  if(ME?.role==='QuanLy'){
+   const [coupons,accounts]=await Promise.all([apiCall('/api/quan-ly/khuyen-mai'),apiCall('/api/quan-ly/tai-khoan')]);
+   coupons.forEach(c=>S.kmOff[c.ma]=!c.bat);
+   accounts.forEach(acc=>{const u=U.find(x=>x.u===(acc.user||acc.tenDangNhap));if(u)u.on=acc.biKhoa?0:1;else U.push({u:acc.user||acc.tenDangNhap,ten:acc.hoTen,role:acc.vaiTro,shop:acc.maShop,hang:acc.maHang,on:acc.biKhoa?0:1,vi:acc.soDu||0,gd:[]})});
+  }
+ }
+ else S.orders=[];
+ if(ME){if(cur==0)vProduct();else if(cur==1)vCart();else if(cur==2)vPay();else if(cur==3)updOrders();else if(cur==4)vStats();else if(cur==11)vVi();else if(cur==5)vDash();else if(cur==6)vAord();else if(cur==12)vShip();else if(cur==13)vChat();badge();wbal();if(cur===2)setTimeout(apiUpdateQuote,0)}
+}
+function apiUser(info){
+ const role=info.vaiTro||info.role||'KhachHang',u=info.user||info.tenDangNhap||info.ma;
+ const user={u,role,ten:info.hoTen||info.ten||u,shop:info.maShop||'',hang:info.maHang||'',vi:info.soDu||0,gd:[],on:1};
+ if(role==='Shipper')user.hang=info.maHang||u;
+ const previous=U.find(x=>x.u===u);if(previous)Object.assign(previous,user);else U.push(user);
+ return previous||user;
+}
+function apiBody(){return {hang,phuongThucThanhToan:pt,maKhuyenMai:S.ma,khoangCachKm:km,diaChiGiao:{hoTen:($$('ad-ten')?.value||ME?.ten||'').trim(),soDienThoai:($$('ad-sdt')?.value||ME?.sdt||'').trim(),diaChi:($$('ad-dc')?.value||ME?.dc||'').trim()}}}
+let apiQuoteTimer=0;
+async function apiUpdateQuote(){
+ if(cur!==2||!$$('sum')||!items().length)return;
+ const carriers=Object.keys(HANG),selected=apiBody();
+ try{
+  const quotes=await Promise.all(carriers.map(async carrier=>({carrier,quote:await apiCall('/api/don-hang/xem-truoc','POST',{...selected,hang:carrier,maKhuyenMai:carrier===hang?S.ma:''})})));
+  const minimum=Math.min(...quotes.map(x=>x.quote.phiShip));
+  quotes.forEach(x=>{const card=document.querySelector('#cars .opt[data-id="'+CSS.escape(x.carrier)+'"]');if(card){const price=card.querySelector('.pr');if(price)price.textContent=fmt(x.quote.phiShip);const badge=card.querySelector('.bd');if(badge)badge.remove();if(x.quote.phiShip===minimum)card.querySelector('.row2')?.insertAdjacentHTML('beforeend',' <span class="bd b3">Rẻ nhất</span>')}});
+  const q=quotes.find(x=>x.carrier===hang).quote;
+  $$('sum').innerHTML=`<button class="btn amz-add" data-a="buy" style="width:100%;margin-bottom:12px;padding:11px">${ME.guest?'Đăng nhập để đặt hàng':'Đặt mua đơn hàng'}</button><b>Tóm tắt đơn hàng (API)</b><div style="margin-top:8px">${row('Tiền hàng ('+(q.khoiLuong||0).toFixed(2)+' kg)',fmt(q.tienHang))}${row('Phí vận chuyển ('+hang+')',fmt(q.phiShip))}${row('Giảm giá'+(S.ma?' ('+S.ma+')':''),fmt(-q.giamGia))}${row('Phí xử lý thanh toán',fmt(q.phiXuLy))}${row('Tổng thanh toán:',fmt(q.tongThanhToan),1)}</div><div class="mu" style="margin-top:8px">Phí và ưu đãi được máy chủ tính từ giỏ hàng hiện tại.</div>`;
+ }catch(err){const note=$$('sum');if(note){note.querySelector('.api-quote-error')?.remove();const warning=document.createElement('div');warning.className='mu api-quote-error';warning.style='color:var(--er);margin-top:8px';warning.textContent='Máy chủ chưa tính được báo giá: '+err.message;note.appendChild(warning)}}
+}
+let cartQuoteRevision=0;
+async function apiUpdateCartQuote(){
+ if(cur!==1||!items().length)return;const revision=++cartQuoteRevision;
+ const box=document.querySelector('#s1 .two>div:last-child .card:last-child');if(!box)return;
+ try{
+  let quote,error='';try{quote=await apiCall('/api/don-hang/xem-truoc','POST',{...apiBody(),hang:'GHN',phuongThucThanhToan:'COD'})}
+  catch(err){error=err.message;quote=await apiCall('/api/don-hang/xem-truoc','POST',{...apiBody(),hang:'GHN',phuongThucThanhToan:'COD',maKhuyenMai:''})}
+  if(revision!==cartQuoteRevision||cur!==1)return;
+  box.innerHTML=`<div class="mu" style="margin-bottom:6px">Báo giá do API tính (GHN, ${km} km)</div>${row('Tiền hàng',fmt(quote.tienHang))}${row('Giảm giá'+(S.ma?' ('+S.ma+')':''),fmt(-quote.giamGia))}${row('Tạm tính hàng hóa',fmt(quote.tienHang-quote.giamGia),1)}${row('Phí ship tham khảo',fmt(quote.phiShip))}${row('Phí xử lý',fmt(quote.phiXuLy))}${row('Tổng thanh toán tham khảo',fmt(quote.tongThanhToan),1)}<button class="btn amz-add" data-a="nav" data-n="2" style="width:100%;margin-top:12px;padding:11px">Tiến hành thanh toán →</button>`;
+  if(error){const note=document.createElement('div');note.className='mu';note.style='color:var(--er);margin-top:8px';note.textContent='Mã khuyến mãi chưa hợp lệ: '+error;box.appendChild(note)}
+ }catch(err){if(revision===cartQuoteRevision){const note=document.createElement('div');note.className='mu';note.style='color:var(--er);margin-top:8px';note.textContent='Không tải được báo giá API: '+err.message;box.appendChild(note)}}
+}
+const renderCartLocal=vCart;vCart=function(){renderCartLocal();apiUpdateCartQuote()};V[1]=vCart;
+async function apiUpdateStats(){
+ if(!DT08_API.token||ME?.role!=='QuanLy'||![4,5].includes(cur))return;
+ try{const stats=await apiCall('/api/thong-ke');if(![4,5].includes(cur))return;
+  const rates=[['Tỷ lệ giao thành công',stats.tyLeGiaoThanhCong,'var(--ok)'],['Tỷ lệ hoàn hàng',stats.tyLeHoanHang,'var(--er)']];
+  const revenue=Object.fromEntries(Object.entries(stats.doanhThuTheoNguoiBan||{}).map(([shop,value])=>[SHOPS[shop]||shop,value]));
+  const carriers=stats.demTheoHang||{};
+  $$('s4').innerHTML=`<div class="s3">${rates.map(([label,value,color])=>`<div class="card"><div class="mu">${label}</div><div class="big" style="color:${color}">${Number(value||0).toFixed(1)}%</div><div class="pg"><i style="width:${Math.max(0,Math.min(100,Number(value||0)))}%;background:${color}"></i></div></div>`).join('')}</div><div class="s3"><div class="card"><b>Doanh thu theo nhà bán (API)</b><div style="margin-top:10px">${bars(revenue,fmt)}</div></div><div class="card"><b>Số đơn theo hãng (API)</b><div style="margin-top:10px">${bars(carriers,v=>v+' đơn')}</div></div></div>`;
+ }catch(err){toast('Không tải được thống kê: '+err.message,true)}
+}
+const renderStatsLocal=vStats;vStats=function(){renderStatsLocal();apiUpdateStats()};V[4]=vStats;
+const renderChatLocal=vChat;vChat=function(){renderChatLocal();const id=cc;if(!DT08_API.token||!id)return;apiCall('/api/don-hang/'+encodeURIComponent(id)+'/tin-nhan').then(messages=>{const order=S.orders.find(x=>x.id===id);if(order)order.chat=messages.map(m=>({u:m.maNguoiGui,ten:m.tenNguoiGui||m.maNguoiGui,role:m.vaiTro,nd:m.noiDung,t:m.thoiDiem}));if(ME?.unreadByOrder)ME.unreadByOrder[id]=0;renderChatLocal();chatBadge()}).catch(err=>toast(err.message,true))};V[13]=vChat;
+async function apiBoot(){
+ try{const cart=await apiCall('/api/gio-hang');S.cart={};(cart.items||[]).forEach(item=>S.cart[item.id||item.maSP]=item.q||item.soLuong);badge();await apiRefresh();if(DT08_API.token){const me=apiUser(await apiCall('/api/toi'));vao(me);await apiRefresh()}}
+ catch(e){DT08_API.token='';localStorage.removeItem('dt08-token');toast('Không kết nối được API: '+e.message,true)}
+}
+document.addEventListener('click',async e=>{
+ const b=e.target.closest('[data-a]');if(!b)return;const a=b.dataset.a,id=b.dataset.id;
+ const handled=['add','inc','dec','del','addq','buynow','km','rmkm','login','reg','logout','buy','adv','end','tra','duyet','tuchoi','nhantra','vetra','hoantien','cs','napvi','pn','pd','ps','kt','vcs','tk','shopaddr'];
+ if(!handled.includes(a))return;
+ e.preventDefault();e.stopImmediatePropagation();
+ try{
+  if(a==='add'||a==='inc'){
+   if(a==='add'||!S.cart[id])await apiCall('/api/gio-hang/them','POST',{maSP:id,soLuong:1});
+   else await apiCall('/api/gio-hang/'+encodeURIComponent(id),'PUT',{soLuong:S.cart[id]+1});
+   S.cart[id]=(S.cart[id]||0)+1;badge();if(cur===1)vCart();toast('Đã cập nhật giỏ hàng');return;
+  }
+  if(a==='dec'||a==='del'){
+   const n=a==='del'?0:Math.max(0,(S.cart[id]||1)-1);
+   if(n===0){await apiCall('/api/gio-hang/'+encodeURIComponent(id),'DELETE');delete S.cart[id]}else{await apiCall('/api/gio-hang/'+encodeURIComponent(id),'PUT',{soLuong:n});S.cart[id]=n}
+   badge();vCart();return;
+  }
+  if(a==='addq'||a==='buynow'){
+   const product=P.find(x=>x.id===pdid),quantity=Math.max(1,pq);if(!product)throw new Loi('OrderException','Không tìm thấy sản phẩm');
+   await apiCall('/api/gio-hang/them','POST',{maSP:product.id,soLuong:quantity});S.cart[product.id]=(S.cart[product.id]||0)+quantity;badge();
+   if(a==='buynow'){go(2);setTimeout(apiUpdateQuote,0)}else toast('Đã thêm '+quantity+' × '+product.ten+' vào giỏ');return;
+  }
+  if(a==='km'||a==='rmkm'){
+   const code=a==='km'?($$('mk').value||'').trim().toUpperCase():'';await apiCall('/api/gio-hang/khuyen-mai','POST',{ma:code});S.ma=code;vCart();toast(code?'Đã gửi mã tới máy chủ để kiểm tra':'Đã bỏ mã');return;
+  }
+  if(a==='login'){
+   const out=await apiCall('/api/dang-nhap','POST',{user:$$('lu').value.trim(),pass:$$('lp').value});DT08_API.token=out.token;localStorage.setItem('dt08-token',out.token);const user=apiUser(out.nguoiDung);vao(user);await apiRefresh();toast('Đăng nhập thành công');return;
+  }
+  if(a==='reg'){
+   const user=$$('lu').value.trim(),pass=$$('lp').value,ten=$$('ln').value.trim();await apiCall('/api/dang-ky','POST',{hoTen:ten,user,matKhau:pass,vaiTro:rk,maShop:rk==='NguoiBan'?user:''});
+   const out=await apiCall('/api/dang-nhap','POST',{user,pass});DT08_API.token=out.token;localStorage.setItem('dt08-token',out.token);vao(apiUser(out.nguoiDung));await apiRefresh();toast('Tạo tài khoản thành công');return;
+  }
+  if(a==='logout'){await apiCall('/api/dang-xuat','POST',{});DT08_API.token='';localStorage.removeItem('dt08-token');S.orders=[];vao(GUEST);return}
+  if(a==='buy'){
+   if(!ME||ME.guest){ret=2;reg=false;vLogin();toast('Đăng nhập để hoàn tất đặt hàng');return}
+   const body=apiBody(),addr=body.diaChiGiao;if(!addr.hoTen||!/^\d{9,11}$/.test(addr.soDienThoai)||addr.diaChi.length<8)throw new Loi('OrderException','Vui lòng nhập đủ họ tên, số điện thoại và địa chỉ giao hàng');
+   const order=apiOrder(await apiCall('/api/don-hang','POST',body));ME.sdt=addr.soDienThoai;ME.dc=addr.diaChi;S.cart={};S.ma='';sel=order.id;await apiRefresh();go(3);toast('Đặt hàng thành công: '+order.id);return;
+  }
+  if(a==='adv'){await apiCall('/api/don-hang/'+encodeURIComponent(id)+'/chuyen-trang-thai','POST',{});await apiRefresh();toast('Đã cập nhật trạng thái đơn');return}
+  if(a==='end'){await apiCall('/api/don-hang/'+encodeURIComponent(id)+'/ket-thuc','POST',{});await apiRefresh();toast('Đã kết thúc đơn');return}
+  if(a==='tra'){await apiCall('/api/don-hang/'+encodeURIComponent(id)+'/tra-hang','POST',{lyDo:$$('tra-ly')?.value||'Đổi trả',moTa:$$('tra-nd')?.value||''});if(trImg)await apiCall('/api/don-hang/'+encodeURIComponent(id)+'/anh-khieu-nai','POST',{anh:trImg,moTa:$$('tra-nd')?.value||'Ảnh kèm yêu cầu trả hàng'});trImg=null;await apiRefresh();toast('Đã gửi yêu cầu trả hàng');return}
+  if(a==='duyet'||a==='tuchoi'){await apiCall('/api/don-hang/'+encodeURIComponent(id)+(a==='duyet'?'/hoan-hang':'/tu-choi-tra-hang'),'POST',{});await apiRefresh();toast('Đã xử lý yêu cầu trả hàng');return}
+  if(a==='nhantra'||a==='vetra'){await apiCall('/api/don-hang/'+encodeURIComponent(id)+(a==='nhantra'?'/nhan-don-tra':'/xac-nhan-gui-ve-shop'),'POST',{});await apiRefresh();return}
+  if(a==='hoantien'){const o=S.orders.find(x=>x.id===id),shop=o?.items.find(x=>ME.role==='QuanLy'||x.sh===ME.shop)?.sh;if(!shop)throw new Loi('KhongCoQuyenException','Không tìm thấy shop cần hoàn tiền');await apiCall('/api/don-hang/'+encodeURIComponent(id)+'/hoan-tien','POST',{maShop:shop});await apiRefresh();toast('Đã hoàn tiền');return}
+  if(a==='cs'){const value=($$('cm').value||'').trim();if(!value)return;await apiCall('/api/don-hang/'+encodeURIComponent(cc)+'/tin-nhan','POST',{noiDung:value});await apiRefresh();vChat();return}
+  if(a==='napvi'){const soTien=Math.round(+$$( 'nv').value),nguon=$$('ns').value;await apiCall('/api/vi/nap-tien','POST',{soTien,nguon});await apiRefresh();vVi();toast('Nạp tiền thành công');return}
+  if(a==='pn'){await apiCall('/api/quan-ly/san-pham/'+encodeURIComponent(id)+'/nhap-kho','POST',{soLuong:10});await apiRefresh();vAprod();return}
+  if(a==='pd'){await apiCall('/api/quan-ly/san-pham/'+encodeURIComponent(id),'DELETE');await apiRefresh();vAprod();return}
+  if(a==='ps'){
+   const val=k=>$$('pf-'+k).value.trim(),payload={ten:val('ten'),gia:+val('gia'),kg:+val('kg'),ton:+val('ton'),sh:ME.role==='QuanLy'?$$('pf-sh').value:ME.shop};
+   if(ed)await apiCall('/api/quan-ly/san-pham/'+encodeURIComponent(ed),'PUT',{ten:payload.ten,donGia:payload.gia,khoiLuong:payload.kg,tonKho:payload.ton});else await apiCall('/api/quan-ly/san-pham','POST',{...payload,maNguoiBan:payload.sh});
+   ed=null;await apiRefresh();vAprod();toast('Đã lưu sản phẩm');return;
+  }
+  if(a==='kt'){const enabled=!!S.kmOff[id];await apiCall('/api/quan-ly/khuyen-mai/'+encodeURIComponent(id)+'/bat-tat','POST',{bat:enabled});S.kmOff[id]=!enabled;vAkm();return}
+  if(a==='vcs'){const price={phiCoBan:+$$('vc-'+id+'-base').value,donGiaKm:+$$('vc-'+id+'-km').value,donGiaKg:+$$('vc-'+id+'-kg').value};await apiCall('/api/quan-ly/van-chuyen/'+encodeURIComponent(id),'PUT',price);HANG[id].base=price.phiCoBan;HANG[id].km=price.donGiaKm;HANG[id].kg=price.donGiaKg;toast('Đã cập nhật bảng giá '+id);return}
+  if(a==='tk'){const user=U.find(x=>x.u===id);await apiCall('/api/quan-ly/tai-khoan/'+encodeURIComponent(id)+'/khoa','POST',{khoa:!!user?.on});if(user)user.on=user.on?0:1;vAtk();return}
+  if(a==='shopaddr'){const address={hoTen:$$('shop-dc-ten').value.trim(),soDienThoai:$$('shop-dc-sdt').value.trim(),diaChi:$$('shop-dc-diachi').value.trim()};const saved=await apiCall('/api/shop/dia-chi-lay-hang','PUT',address);ME.shopAddress=saved.diaChiLayHang;vAprod();toast('Đã lưu địa chỉ lấy hàng');return}
+  }catch(err){const le=$$('le');if(le&&(!ME||ME.guest))le.textContent=err.message;toast((err.loi?err.loi+': ':'')+err.message,true)}
+},true);
+document.addEventListener('change',e=>{
+ const t=e.target;if(!t.files?.[0]||!t.dataset.k)return;const id=t.dataset.id,k=t.dataset.k;
+ if(!['xn','ag','kn'].includes(k))return;e.stopImmediatePropagation();
+ readImg(t.files[0],async image=>{try{
+  if(k==='xn')await apiCall('/api/don-hang/'+encodeURIComponent(id)+'/xac-nhan-giao','POST',{anh:image});
+  else await apiCall('/api/don-hang/'+encodeURIComponent(id)+(k==='kn'?'/anh-khieu-nai':'/anh-giao-hang'),'POST',{anh:image,moTa:k==='kn'?($$('kn-nd')?.value||'Khiếu nại'):''});
+  await apiRefresh();toast('Đã gửi ảnh lên máy chủ');
+ }catch(err){toast(err.message,true)}})
+},true);
+document.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(b&&(['car','pay'].includes(b.dataset.a)||(b.dataset.a==='nav'&&+b.dataset.n===2))){clearTimeout(apiQuoteTimer);apiQuoteTimer=setTimeout(apiUpdateQuote,0)}},true);
+document.addEventListener('input',e=>{if(e.target.id==='ad-dc'){clearTimeout(apiQuoteTimer);apiQuoteTimer=setTimeout(apiUpdateQuote,450)}},true);
+document.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(b&&['fl','sort','shopview','home'].includes(b.dataset.a)){clearTimeout(apiProductTimer);apiProductTimer=setTimeout(()=>apiLoadProducts().catch(err=>toast(err.message,true)),0)}},true);
+document.addEventListener('input',e=>{if(e.target.id==='hq'){clearTimeout(apiProductTimer);apiProductTimer=setTimeout(()=>apiLoadProducts().catch(err=>toast(err.message,true)),220)}},true);
+apiBoot();
 </script>
 </body>
 </html>
