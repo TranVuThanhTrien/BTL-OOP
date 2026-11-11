@@ -8,7 +8,6 @@ class SanPham {
     double m_donGia, m_khoiLuong, m_danhGia;
     int m_tonKho, m_daBan;
 public:
-    // TODO(A-1): kiểm tra đơn giá > 0, khối lượng > 0, tồn kho >= 0, daBan >= 0, 0 <= danhGia <= 5, maNguoiBan hợp lệ (laMaShopHopLe) -> OrderException
     SanPham(string ma, string ten, string maNguoiBan, double donGia, double khoiLuong, int tonKho, int daBan = 0, double danhGia = 0);
     const string& ma() const { return m_ma; }
     const string& ten() const { return m_ten; }
@@ -16,13 +15,13 @@ public:
     double donGia() const { return m_donGia; }
     double khoiLuong() const { return m_khoiLuong; }
     int    tonKho() const { return m_tonKho; }
-    int    daBan() const { return m_daBan; }          // TODO(A-22)
-    double danhGia() const { return m_danhGia; }      // TODO(A-22)
-    void datTen(const string& ten);                   // TODO(A-1) các setter đều kiểm tra như ctor
+    int    daBan() const { return m_daBan; }
+    double danhGia() const { return m_danhGia; }
+    void datTen(const string& ten);
     void datDonGia(double donGia);
     void datKhoiLuong(double khoiLuong);
     void datTonKho(int tonKho);
-    void giamTon(int soLuong);                        // TODO(A-2): không đủ -> HetHangException
-    void tangTon(int soLuong);                        // TODO(A-2)
-    void congDaBan(int soLuong);                      // TODO(A-22): chỉ gọi khi đặt hàng thành công
+    void giamTon(int soLuong);
+    void tangTon(int soLuong);
+    void congDaBan(int soLuong);
 };

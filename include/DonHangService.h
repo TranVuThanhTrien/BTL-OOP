@@ -17,9 +17,9 @@ public:
     GioHang& gio(const string& maGio);               // chưa có thì tạo
     // ---- Tạo đơn ----
     // Đường tính tiền DUY NHẤT: dựng DonHang tạm từ giỏ -> DonHang::tinhKetQua(). Không trừ kho, không lưu.
-    KetQuaTinhTien xemTruoc(const GioHang& gio, const string& hang, const string& pttt, const string& maKM, double km) const;   // TODO(D-1)
+    KetQuaTinhTien xemTruoc(const GioHang& gio, const string& hang, const string& pttt, const string& maKM, double km) const;
     // Giỏ -> kiểm tra tồn -> khuyến mãi -> chotDon (ship) -> payment->thanhToan -> trừ kho + congDaBan -> lưu file. Lỗi giữa chừng phải KHÔNG để lại kho/ví nửa vời (thanh toán sau cùng, trước khi trừ kho).
-    const DonHang& taoDon(NguoiDung& khach, GioHang& gio, const DiaChi& diaChi, const string& hang, const string& pttt, const string& maKM, double km);   // TODO(D-1) rồi gio.lamTrong()
+    const DonHang& taoDon(NguoiDung& khach, GioHang& gio, const DiaChi& diaChi, const string& hang, const string& pttt, const string& maKM, double km);
     // ---- Xem đơn: lọc theo vai trò (D-10) ----
     vector<const DonHang*> layDanhSach(const NguoiDung& nguoiGoi) const;     // Khách: của mình | NguoiBan: đơn có hàng shop mình | Shipper: đơn hãng mình | QuanLy: tất cả
     const DonHang& layChiTiet(const string& maDon, const NguoiDung& nguoiGoi) const;   // ngoài phạm vi -> KhongCoQuyenException
@@ -28,7 +28,7 @@ public:
     // Bảng quyền (CHỐT): NguoiBan: chỉ Mới->Xác nhận | Shipper đúng hãng: Xác nhận->Đang giao; Đang giao->Hoàn tất CHỈ qua xacNhanGiao | QuanLy: mọi bước trước Hoàn tất, không bỏ qua ảnh | KhachHang: không được.
     // Hoàn tất->Trả hàng KHÔNG nằm trong bảng này: chỉ xảy ra khi shipper xacNhanGuiVeShop. (Bản cũ trong header ghi "NguoiBan: Hoàn tất->Trả hàng", mâu thuẫn với D-15; đã bỏ.)
     void chuyenTrangThai(const string& maDon, const NguoiDung& nguoiGoi);
-    void xacNhanGiao(const string& maDon, NguoiDung& shipper, const string& anhBase64);   // TODO(D-18) lưu ảnh -> DonHang::xacNhanGiaoThanhCong -> traPhiShip(*shipper.vi()) đúng 1 lần
+    void xacNhanGiao(const string& maDon, NguoiDung& shipper, const string& anhBase64);
     void ketThuc(const string& maDon, const NguoiDung& nguoiGoi);            // D-13: khách chủ đơn, người bán có hàng, quản lý
     // ---- Trả hàng, ảnh ----
     void traHang(const string& maDon, const NguoiDung& khach, const string& lyDo);   // chỉ khách chủ đơn

@@ -2,6 +2,14 @@
 #include "OrderException.h"
 #include <fstream>
 #include <cstdio>
+#include <filesystem>
+#include <cctype>
+#ifdef _WIN32
+#ifndef WIN32_LEAN_AND_MEAN
+#define WIN32_LEAN_AND_MEAN
+#endif
+#include <windows.h>
+#endif
 
 // Người phụ trách: C | nhánh feature/payment-storage | LỚP 5
 #if __has_include("json.hpp")
@@ -12,7 +20,49 @@ using nlohmann::json;
 #define DT08_HAS_JSON 0
 #endif
 
-// TODO(C-4): docSanPham, luuSanPham (data/san_pham.json)
+namespace {
+vector<unsigned char> giaiMaBase64(const string& s) {
+    static const string bangMa = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+    vector<unsigned char> out;
+    int acc = 0, bits = -8;
+    bool gap = false;
+    for (unsigned char c : s) {
+        if (c == '=') { gap = true; continue; }
+        if (c == ' ' || c == '\r' || c == '\n' || c == '\t') continue;
+        if (gap) throw OrderException("Dữ liệu Base64 không hợp lệ");
+        std::size_t viTri = bangMa.find(static_cast<char>(c));
+        if (viTri == string::npos) throw OrderException("Dữ liệu Base64 không hợp lệ");
+        acc = (acc << 6) | static_cast<int>(viTri);
+        bits += 6;
+        if (bits >= 0) {
+            out.push_back(static_cast<unsigned char>((acc >> bits) & 0xff));
+            bits -= 8;
+        }
+    }
+    if (bits == -2 || bits == -4) throw OrderException("Dữ liệu Base64 bị thiếu ký tự");
+    return out;
+}
+
+string tenFileAnToan(const string& s) {
+    string out;
+    for (unsigned char c : s) {
+        if (std::isalnum(c) || c == '-' || c == '_') out.push_back(static_cast<char>(c));
+        else if (c == ' ' || c == '.') out.push_back('_');
+    }
+    return out.empty() ? "anh" : out;
+}
+
+void thayTheFile(const string& tam, const string& dich) {
+#ifdef _WIN32
+    if (!MoveFileExA(tam.c_str(), dich.c_str(), MOVEFILE_REPLACE_EXISTING | MOVEFILE_WRITE_THROUGH))
+        throw FileDataException("Không thể thay thế file dữ liệu: " + dich);
+#else
+    if (std::rename(tam.c_str(), dich.c_str()) != 0)
+        throw FileDataException("Không thể thay thế file dữ liệu: " + dich);
+#endif
+}
+}
+
 vector<SanPham> DataStore::docSanPham(const string& duongDan) {
 #if DT08_HAS_JSON
     std::ifstream f(duongDan);
@@ -86,16 +136,15 @@ void DataStore::luuSanPham(const vector<SanPham>& ds, const string& duongDan) {
     f << j.dump(2);
 #else
     (void)ds;
-    f << "[]\n";
+    f.close();
+    std::remove(tam.c_str());
+    throw FileDataException("Không lưu được JSON vì thiếu third_party/json.hpp: " + duongDan);
 #endif
     f.close();
-    std::remove(duongDan.c_str());
-    if (std::rename(tam.c_str(), duongDan.c_str()) != 0) {
-        throw FileDataException("Không thể đổi tên file tạm sang: " + duongDan);
-    }
+    if (!f) throw FileDataException("Ghi file sản phẩm không hoàn tất: " + duongDan);
+    thayTheFile(tam, duongDan);
 }
 
-// TODO(C-5): docDonHang, luuDonHang (data/don_hang.json) - Đầy đủ mọi trường nghiệp vụ
 vector<DonHang> DataStore::docDonHang(const string& duongDan) {
     std::ifstream f(duongDan);
     if (!f.is_open()) {
@@ -179,6 +228,10 @@ vector<DonHang> DataStore::docDonHang(const string& duongDan) {
                     d.m_daHoanTien[it.key()] = it.value().get<double>();
                 }
             }
+            if (item.contains("daDoc") && item["daDoc"].is_object()) {
+                for (auto it = item["daDoc"].begin(); it != item["daDoc"].end(); ++it)
+                    d.m_daDoc[it.key()] = it.value().get<std::size_t>();
+            }
             ds.push_back(std::move(d));
         }
         return ds;
@@ -188,7 +241,7 @@ vector<DonHang> DataStore::docDonHang(const string& duongDan) {
         throw FileDataException("Lỗi đọc JSON đơn hàng (" + duongDan + "): " + e.what());
     }
 #else
-    return {};
+    throw FileDataException("Không đọc được JSON vì thiếu third_party/json.hpp: " + duongDan);
 #endif
 }
 
@@ -253,6 +306,7 @@ void DataStore::luuDonHang(const vector<DonHang>& ds, const string& duongDan) {
             {"tinNhan", tnArr},
             {"daHoanTien", d.m_daHoanTien}
         };
+        obj["daDoc"] = d.m_daDoc;
         if (d.m_yeuCauTra) {
             obj["yeuCauTra"] = {
                 {"lyDo", d.m_yeuCauTra->lyDo},
@@ -267,16 +321,15 @@ void DataStore::luuDonHang(const vector<DonHang>& ds, const string& duongDan) {
     f << j.dump(2);
 #else
     (void)ds;
-    f << "[]\n";
+    f.close();
+    std::remove(tam.c_str());
+    throw FileDataException("Không lưu được JSON vì thiếu third_party/json.hpp: " + duongDan);
 #endif
     f.close();
-    std::remove(duongDan.c_str());
-    if (std::rename(tam.c_str(), duongDan.c_str()) != 0) {
-        throw FileDataException("Không thể đổi tên file tạm sang: " + duongDan);
-    }
+    if (!f) throw FileDataException("Ghi file đơn hàng không hoàn tất: " + duongDan);
+    thayTheFile(tam, duongDan);
 }
 
-// TODO(C-8): docTaiKhoan, luuTaiKhoan (data/tai_khoan.json)
 vector<unique_ptr<NguoiDung>> DataStore::docTaiKhoan(const string& duongDan) {
     std::ifstream f(duongDan);
     if (!f.is_open()) {
@@ -335,7 +388,7 @@ vector<unique_ptr<NguoiDung>> DataStore::docTaiKhoan(const string& duongDan) {
         throw FileDataException("Lỗi đọc JSON tài khoản (" + duongDan + "): " + e.what());
     }
 #else
-    return {};
+    throw FileDataException("Không đọc được JSON vì thiếu third_party/json.hpp: " + duongDan);
 #endif
 }
 
@@ -371,50 +424,48 @@ void DataStore::luuTaiKhoan(const vector<unique_ptr<NguoiDung>>& ds, const strin
     f << j.dump(2);
 #else
     (void)ds;
-    f << "[]\n";
+    f.close();
+    std::remove(tam.c_str());
+    throw FileDataException("Không lưu được JSON vì thiếu third_party/json.hpp: " + duongDan);
 #endif
     f.close();
-    std::remove(duongDan.c_str());
-    if (std::rename(tam.c_str(), duongDan.c_str()) != 0) {
-        throw FileDataException("Không thể đổi tên file tạm sang: " + duongDan);
-    }
+    if (!f) throw FileDataException("Ghi file tài khoản không hoàn tất: " + duongDan);
+    thayTheFile(tam, duongDan);
 }
 
-// TODO(C-5): luuAnhBase64 - Kiểm tra định dạng png/jpg/svg và giới hạn 5MB thực tế
+// Ghi bytes ảnh đã giải mã; không lưu chuỗi Base64 vào file ảnh.
 string DataStore::luuAnhBase64(const string& thuMucAnh, const string& tienTo, const string& base64) {
     if (base64.empty()) {
         throw OrderException("Dữ liệu ảnh đính kèm không được để trống");
     }
-    string duoi = ".jpg";
+    string duoi;
     std::size_t viTriPhay = base64.find(',');
     string phanDau = (viTriPhay != string::npos) ? inThuong(base64.substr(0, viTriPhay)) : "";
-    if (!phanDau.empty()) {
-        if (phanDau.find("image/png") != string::npos) {
-            duoi = ".png";
-        } else if (phanDau.find("image/jpeg") != string::npos || phanDau.find("image/jpg") != string::npos) {
-            duoi = ".jpg";
-        } else if (phanDau.find("image/svg") != string::npos) {
-            duoi = ".svg";
-        } else {
-            throw OrderException("Định dạng ảnh không được hỗ trợ (chỉ nhận PNG hoặc JPG)");
-        }
-    }
-    std::size_t doDaiPayload = (viTriPhay != string::npos) ? (base64.size() - viTriPhay - 1) : base64.size();
-    std::size_t uocTinhBytes = (doDaiPayload * 3) / 4;
-    if (uocTinhBytes > 5 * 1024 * 1024) {
-        throw OrderException("Kích thước ảnh vượt quá giới hạn tối đa 5MB");
-    }
+    if (phanDau.find("image/png") != string::npos) duoi = ".png";
+    else if (phanDau.find("image/jpeg") != string::npos || phanDau.find("image/jpg") != string::npos) duoi = ".jpg";
+    else throw OrderException("Ảnh phải có tiền tố data:image/png;base64, hoặc data:image/jpeg;base64,");
+    if (phanDau.find(";base64") == string::npos || viTriPhay == string::npos)
+        throw OrderException("Data URL ảnh không đúng định dạng Base64");
+    vector<unsigned char> bytes = giaiMaBase64(base64.substr(viTriPhay + 1));
+    constexpr std::size_t gioiHanAnh = 5u * 1024u * 1024u;
+    if (bytes.empty() || bytes.size() > gioiHanAnh)
+        throw OrderException("Ảnh phải lớn hơn 0 byte và không vượt quá 5MB");
+    const bool laPng = bytes.size() >= 8 && bytes[0] == 0x89 && bytes[1] == 'P' && bytes[2] == 'N' && bytes[3] == 'G' && bytes[4] == 0x0d && bytes[5] == 0x0a && bytes[6] == 0x1a && bytes[7] == 0x0a;
+    const bool laJpeg = bytes.size() >= 3 && bytes[0] == 0xff && bytes[1] == 0xd8 && bytes[2] == 0xff;
+    if ((duoi == ".png" && !laPng) || (duoi == ".jpg" && !laJpeg))
+        throw OrderException("Nội dung ảnh không khớp định dạng PNG/JPG đã khai báo");
 
     static int s_demAnh = 0;
     ++s_demAnh;
     string thuMuc = thuMucAnh.empty() ? "data/anh" : thuMucAnh;
-    string tenFile = (tienTo.empty() ? "anh" : tienTo) + "_" + std::to_string(s_demAnh) + duoi;
+    string tenFile = tenFileAnToan(tienTo) + "_" + std::to_string(s_demAnh) + duoi;
     string duongDan = thuMuc + "/" + tenFile;
-
+    std::error_code ec;
+    std::filesystem::create_directories(thuMuc, ec);
+    if (ec) throw FileDataException("Không tạo được thư mục ảnh: " + thuMuc);
     std::ofstream out(duongDan, std::ios::binary);
-    if (out.is_open()) {
-        out << base64;
-        out.close();
-    }
+    if (!out.is_open()) throw FileDataException("Không ghi được ảnh: " + duongDan);
+    out.write(reinterpret_cast<const char*>(bytes.data()), static_cast<std::streamsize>(bytes.size()));
+    if (!out) throw FileDataException("Ghi ảnh không hoàn tất: " + duongDan);
     return duongDan;
 }

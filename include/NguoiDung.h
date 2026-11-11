@@ -51,8 +51,8 @@ public:
     bool kiemTraMatKhau(const string& matKhauThuan) const { return kiemTraBam(matKhauThuan, m_matKhauBam); }
 };
 
-class KhachHang : public NguoiDung {                 // TODO(A-3) cài vaiTro/coQuyen/clone trong NguoiDung.cpp
-    TaiKhoanVi m_vi; DiaChi m_diaChi;                // TODO(A-16): địa chỉ mặc định, lưu sau lần đặt hàng đầu
+class KhachHang : public NguoiDung {
+    TaiKhoanVi m_vi; DiaChi m_diaChi;
 public:
     KhachHang(string ma, string tenDangNhap, string matKhauBam, string hoTen)
         : NguoiDung(std::move(ma), std::move(tenDangNhap), std::move(matKhauBam), std::move(hoTen)) {}
@@ -63,7 +63,7 @@ public:
     void datDiaChi(const DiaChi& d) { m_diaChi = d; }
 };
 class NguoiBan : public NguoiDung {                  // tên đăng nhập == mã shop (TT, DT, NS), 2-4 chữ cái in hoa
-    string m_maShop, m_tenShop; DiaChi m_diaChiLayHang;   // TODO(A-16): người bán tự sửa địa chỉ lấy hàng
+    string m_maShop, m_tenShop; DiaChi m_diaChiLayHang;
 public:
     NguoiBan(string ma, string maShop, string matKhauBam, string tenShop)
         : NguoiDung(std::move(ma), maShop, std::move(matKhauBam), tenShop), m_maShop(std::move(maShop)), m_tenShop(std::move(tenShop)) {}
@@ -73,7 +73,7 @@ public:
     const DiaChi& diaChiLayHang() const { return m_diaChiLayHang; }
     void datDiaChiLayHang(const DiaChi& d) { m_diaChiLayHang = d; }
 };
-class ShipperVanChuyen : public NguoiDung {          // TODO(A-15) tên đăng nhập GHN, GHTK, VTP; chỉ đụng tới đơn của hãng mình
+class ShipperVanChuyen : public NguoiDung {
     string m_maHang; TaiKhoanVi m_vi;                // ví nhận phí ship (cộng đúng 1 lần/đơn, xem DonHang::traPhiShip)
 public:
     ShipperVanChuyen(string ma, string tenDangNhap, string matKhauBam, string hoTen, string maHang)

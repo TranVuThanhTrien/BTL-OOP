@@ -9,17 +9,17 @@ public:
     virtual string ten() const = 0;                  // một trong pttt::*
     virtual unique_ptr<PhuongThucThanhToan> clone() const = 0;
 };
-class COD : public PhuongThucThanhToan {             // TODO(C-2) phí 0
+class COD : public PhuongThucThanhToan {
 public:
     bool thanhToan(double) override;  double tinhPhiXuLy(double) const override;
     string ten() const override { return pttt::COD; }  unique_ptr<PhuongThucThanhToan> clone() const override { return make_unique<COD>(*this); }
 };
-class TheTinDung : public PhuongThucThanhToan {      // TODO(C-2) phí hangso::PHI_THE_TIN_DUNG, kiểm tra số thẻ + hạn mức (giả lập)
+class TheTinDung : public PhuongThucThanhToan {
 public:
     bool thanhToan(double) override;  double tinhPhiXuLy(double) const override;
     string ten() const override { return pttt::THE_TIN_DUNG; }  unique_ptr<PhuongThucThanhToan> clone() const override { return make_unique<TheTinDung>(*this); }
 };
-class ViDienTu : public PhuongThucThanhToan {        // TODO(C-2) giữ con trỏ KHÔNG sở hữu tới ví của khách (ví nằm trong KhachHang do AuthService sở hữu, địa chỉ ổn định)
+class ViDienTu : public PhuongThucThanhToan {
     TaiKhoanVi* m_vi;                                // clone() chép con trỏ; sau khi đọc đơn từ file con trỏ = nullptr và KHÔNG được gọi thanhToan lại
     string m_moTa;                                   // ghi vào lịch sử ví, vd "Thanh toán đơn DH001"
 public:
@@ -29,4 +29,4 @@ public:
     double tinhPhiXuLy(double) const override;
     string ten() const override { return pttt::VI_DIEN_TU; }  unique_ptr<PhuongThucThanhToan> clone() const override { return make_unique<ViDienTu>(*this); }
 };
-unique_ptr<PhuongThucThanhToan> taoPhuongThuc(const string& ten, TaiKhoanVi* viKhach = nullptr);   // TODO(C-3) factory; tên lạ -> ThanhToanThatBaiException
+unique_ptr<PhuongThucThanhToan> taoPhuongThuc(const string& ten, TaiKhoanVi* viKhach = nullptr);

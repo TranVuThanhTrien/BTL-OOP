@@ -9,22 +9,21 @@ public:
     virtual string ma() const = 0;
     virtual unique_ptr<KhuyenMai> clone() const = 0;
 };
-class KMPhanTram : public KhuyenMai {                // TODO(A-6) GIAM10: 10%, tối đa 50.000đ, giỏ >= 200.000đ
+class KMPhanTram : public KhuyenMai {
 public:
     bool dieuKienHopLe(const TomTatGio&) const override;  double apDung(const TomTatGio&, double) const override;
     string ma() const override { return km::GIAM10; }     unique_ptr<KhuyenMai> clone() const override { return make_unique<KMPhanTram>(*this); }
 };
-class KMGiamTien : public KhuyenMai {                // TODO(A-6) GIAM30K: giảm 30.000đ khi mua từ 2 nhà bán
+class KMGiamTien : public KhuyenMai {
 public:
     bool dieuKienHopLe(const TomTatGio&) const override;  double apDung(const TomTatGio&, double) const override;
     string ma() const override { return km::GIAM30K; }    unique_ptr<KhuyenMai> clone() const override { return make_unique<KMGiamTien>(*this); }
 };
-class KMFreeShip : public KhuyenMai {                // TODO(A-6) FREESHIP: miễn ship khi giỏ >= 300.000đ (giảm đúng bằng phiShip)
+class KMFreeShip : public KhuyenMai {
 public:
     bool dieuKienHopLe(const TomTatGio&) const override;  double apDung(const TomTatGio&, double) const override;
     string ma() const override { return km::FREESHIP; }   unique_ptr<KhuyenMai> clone() const override { return make_unique<KMFreeShip>(*this); }
 };
-// TODO(A-7): factory. Mã sai HOẶC đang bị quản lý tắt -> MaGiamGiaKhongHopLeException. Không phân biệt hoa thường.
 unique_ptr<KhuyenMai> taoKhuyenMai(const string& ma);
 // Bật/tắt khuyến mãi (D-11: /api/quan-ly/khuyen-mai/{ma}/bat-tat). Trạng thái là biến tĩnh trong KhuyenMai.cpp,
 // KHÔNG lưu file; mặc định cả 3 mã đều bật. Truy cập đã được khóa bằng mutex chung của server (xem docs/KIEN_TRUC.md mục 6).
