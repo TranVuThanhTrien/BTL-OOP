@@ -1,0 +1,12 @@
+\chapter{Kiểm thử và đánh giá}
+\section{Phương pháp}
+Bộ kiểm thử `dt08_test` dùng các kiểm tra khẳng định cho domain, trạng thái, thanh toán, phân quyền và đọc/ghi JSON. CTest được cấu hình để chạy binary với thư mục làm việc là gốc dự án. CMake chỉ bật AddressSanitizer khi compiler xác nhận hỗ trợ cờ tương ứng.
+
+\section{Kết quả thực thi}
+Trong môi trường Windows hiện tại, `ctest --test-dir build-api --output-on-failure` chạy 1/1 test thành công. CMake cache của cấu hình này để trống `DT08_HAS_ASAN`; do đó kết quả này không phải là một lần chạy AddressSanitizer. Valgrind không được cài trong môi trường hiện tại. Không kết luận rằng đã kiểm tra động rò rỉ bộ nhớ bằng công cụ chuyên dụng.
+
+\section{Đánh giá}
+Kiểm thử hiện có xác nhận các hành vi nghiệp vụ được bao phủ bởi `main_test.cpp`, nhưng là một test executable duy nhất và chưa thay thế kiểm thử tích hợp giao diện trên nhiều trình duyệt. Cần chạy lại ASan trên compiler hỗ trợ hoặc Valgrind trên Linux để bổ sung kiểm tra heap; cần kiểm thử API end-to-end độc lập trong pipeline trước khi triển khai thật.
+
+\section{Giới hạn}
+Token chưa hết hạn; băm mật khẩu tự viết chỉ nhằm tránh lưu thuần văn bản; bảng phí/khuyến mãi không bền qua lần chạy; thời gian theo đồng hồ máy chủ. Các giới hạn này được ghi trong tài liệu kiến trúc.

@@ -1,0 +1,14 @@
+\chapter{Tổng quan đề tài}
+\section{Bối cảnh và mục tiêu}
+Một đơn hàng trực tuyến cần giữ nhất quán giữa tồn kho, giá, giảm giá, phí vận chuyển, thanh toán và trạng thái giao nhận. Đề tài xây dựng ứng dụng mô phỏng quy trình đó bằng C++17, áp dụng đóng gói, kế thừa, đa hình và composition; cung cấp console cùng HTTP API để giao diện web thao tác dữ liệu thật.
+
+Mục tiêu cụ thể là quản lý nhiều cửa hàng và hãng vận chuyển; hỗ trợ nhiều phương thức thanh toán/khuyến mãi; kiểm soát chuyển trạng thái, ảnh giao hàng và trả hàng; phân quyền theo vai trò; lưu sản phẩm, đơn và tài khoản qua JSON.
+
+\section{Phạm vi chức năng}
+Các vai trò gồm khách hàng, người bán, shipper và quản lý. Khách xem/lọc sản phẩm, lập giỏ, xem trước và đặt đơn, theo dõi đơn, nhắn tin và yêu cầu trả hàng. Người bán quản lý sản phẩm của shop, xác nhận đơn và xử lý yêu cầu trả. Shipper xem đơn thuộc hãng mình, cập nhật giao nhận kèm ảnh và nhận phí ship. Quản lý xem/điều hành dữ liệu theo quyền được cấp.
+
+\section{Công nghệ và quy ước}
+Ứng dụng dùng C++17, CMake, cpp-httplib, thư viện JSON đơn header và HTML/CSS/JavaScript. Mã nguồn được chia thành domain (`include/`, `src/`), API, lưu trữ (`DataStore`) và web. Domain không phụ thuộc JSON/HTTP; `unique_ptr` thể hiện quyền sở hữu object đa hình.
+
+\section{Tổ chức báo cáo}
+Chương 2 trình bày thiết kế hướng đối tượng và mẫu thiết kế. Chương 3 giải thích API, giao diện và lưu trữ. Chương 4 mô tả kiểm thử và kết quả quan sát. Cuối báo cáo tổng hợp kết quả, giới hạn và hướng phát triển.

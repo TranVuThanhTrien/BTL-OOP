@@ -1,0 +1,6 @@
+\chapter*{Kết luận và hướng phát triển}
+\addcontentsline{toc}{chapter}{Kết luận và hướng phát triển}
+
+Đồ án đã xây dựng luồng quản lý sản phẩm, giỏ hàng, đặt hàng, thanh toán, giao nhận, trả hàng và chat theo đơn với C++17; web trao đổi dữ liệu qua HTTP API và các dữ liệu chính được lưu JSON. Thiết kế sử dụng Strategy, Factory, State, Prototype và composition để tách thuật toán, điều kiện chuyển trạng thái và quyền sở hữu.
+
+Kiểm thử hiện tại chạy thành công trên cấu hình Windows đã nêu, nhưng chưa có bằng chứng chạy công cụ chuyên dụng phát hiện rò rỉ. Hướng tiếp theo gồm tích hợp CI, chạy ASan/Valgrind trên môi trường phù hợp, quản lý phiên/token an toàn hơn, lưu cấu hình vận chuyển/khuyến mãi bền vững và tăng kiểm thử API cùng trình duyệt.
